@@ -62,7 +62,6 @@
       color: #111827;
     }
 
-    /* Panel de lista */
     .songs-panel {
       flex: 1;
       min-width: 0;
@@ -144,7 +143,6 @@
       border-bottom: none;
     }
 
-    /* Panel de detalle / nueva canción */
     .detail-panel {
       flex: 1.2;
       min-width: 0;
@@ -243,9 +241,7 @@
         </div>
         <p class="small">Toca el nombre de una alabanza para ver la letra abajo.</p>
 
-        <div id="songList" class="song-list">
-          <!-- Aquí se renderiza la lista -->
-        </div>
+        <div id="songList" class="song-list"></div>
       </section>
 
       <!-- Panel derecho: detalle y formulario -->
@@ -265,10 +261,15 @@
 
         <h2>Agregar / editar alabanza</h2>
 
-        <!-- 🔹 Botón NUEVA ALABANZA para no sobreescribir la anterior -->
-        <div style="margin-bottom: 0.5rem;">
+        <div style="margin-bottom: 0.5rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
           <button type="button" class="btn btn-secondary" id="newSongBtn">
             Nueva alabanza
+          </button>
+          <button type="button" class="btn btn-secondary" id="exportBtn">
+            Exportar alabanzas
+          </button>
+          <button type="button" class="btn btn-secondary" id="importBtn">
+            Importar alabanzas
           </button>
         </div>
 
@@ -300,9 +301,7 @@ D            G
   </main>
 
   <script>
-    // Clave para localStorage
     const STORAGE_KEY = "cancioneroAlabanzas";
-
     let songs = [];
     let selectedSongId = null;
 
@@ -331,7 +330,6 @@ D            G
 
       listEl.innerHTML = "";
 
-      // Ordenar por tono y luego por nombre
       const sorted = [...songs].sort((a, b) => {
         const toneA = (a.tone || "").toLowerCase();
         const toneB = (b.tone || "").toLowerCase();
@@ -350,8 +348,6 @@ D            G
         const lyrics = (song.lyrics || "").toLowerCase();
 
         const matchesTone = !filterTone || tone.includes(filterTone);
-
-        // Buscar en nombre + letra + tono
         const combinedText = `${name} ${lyrics} ${tone}`;
         const matchesSearch = !filterName || combinedText.includes(filterName);
 
@@ -377,7 +373,6 @@ D            G
 
         item.appendChild(button);
         item.appendChild(tone);
-
         listEl.appendChild(item);
       });
     }
@@ -401,7 +396,6 @@ D            G
       toneEl.textContent = song.tone ? `Tono: ${song.tone}` : "";
       lyricsEl.textContent = song.lyrics || "";
 
-      // También rellenamos el formulario con la alabanza seleccionada para editarla
       document.getElementById("songName").value = song.name || "";
       document.getElementById("songTone").value = song.tone || "";
       document.getElementById("songLyrics").value = song.lyrics || "";
@@ -419,7 +413,6 @@ D            G
         return;
       }
 
-      // Si hay una alabanza seleccionada, la editamos; si no, creamos una nueva
       if (selectedSongId !== null) {
         const idx = songs.findIndex(s => s.id === selectedSongId);
         if (idx !== -1) {
@@ -444,13 +437,45 @@ D            G
       alert("Alabanza guardada ✅");
     }
 
-    // 🔹 FUNCION: NUEVA ALABANZA (para no sobreescribir la anterior)
     function startNewSong() {
       selectedSongId = null;
       document.getElementById("songForm").reset();
-      // Opcional: mantener texto de ejemplo en textarea
       document.getElementById("songLyrics").value = "";
-      // No tocamos el detalle para que sigas viendo la anterior si quieres
+    }
+
+    // 🔹 EXPORTAR: muestra un JSON para copiar
+    function exportSongs() {
+      if (!songs.length) {
+        alert("No hay alabanzas para exportar.");
+        return;
+      }
+      const data = JSON.stringify(songs);
+      navigator.clipboard?.writeText(data).then(
+        () => {
+          alert("Alabanzas copiadas al portapapeles. Pégalas en un bloc de notas o en la app de destino.");
+        },
+        () => {
+          const result = prompt("Copia este texto y guárdalo en un bloc de notas:", data);
+          if (!result) return;
+        }
+      );
+    }
+
+    // 🔹 IMPORTAR: pega el JSON exportado
+    function importSongs() {
+      const input = prompt("Pega aquí el texto que exportaste con las alabanzas:");
+      if (!input) return;
+      try {
+        const parsed = JSON.parse(input);
+        if (!Array.isArray(parsed)) throw new Error("Formato inválido");
+        songs = parsed;
+        saveSongs();
+        renderSongList();
+        selectedSongId = null;
+        alert("Alabanzas importadas correctamente ✅");
+      } catch (e) {
+        alert("El texto pegado no es válido. Asegúrate de pegar exactamente lo que exportaste.");
+      }
     }
 
     function setup() {
@@ -461,6 +486,8 @@ D            G
       document.getElementById("filterTone").addEventListener("input", renderSongList);
       document.getElementById("filterName").addEventListener("input", renderSongList);
       document.getElementById("newSongBtn").addEventListener("click", startNewSong);
+      document.getElementById("exportBtn").addEventListener("click", exportSongs);
+      document.getElementById("importBtn").addEventListener("click", importSongs);
     }
 
     document.addEventListener("DOMContentLoaded", setup);
