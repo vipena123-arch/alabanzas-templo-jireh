@@ -62,6 +62,7 @@
       color: #111827;
     }
 
+    /* Panel de lista */
     .songs-panel {
       flex: 1;
       min-width: 0;
@@ -143,6 +144,7 @@
       border-bottom: none;
     }
 
+    /* Panel de detalle / nueva canción */
     .detail-panel {
       flex: 1.2;
       min-width: 0;
@@ -232,11 +234,11 @@
         <div class="songs-filters">
           <div style="flex:1">
             <label for="filterTone">Filtrar por tono</label>
-            <input id="filterTone" type="text" placeholder="Ej: Re mayor, Sol mayor" />
+            <input id="filterTone" type="text" placeholder="Ej: Re, Do, Sol mayor..." />
           </div>
           <div style="flex:1">
             <label for="filterName">Buscar por nombre o palabra de la letra</label>
-            <input id="filterName" type="text" placeholder="Ej: 'menguar', 'fiel', 'pacto'..." />
+            <input id="filterName" type="text" placeholder="Ej: 'menguar', 'pastor', 'gloria'..." />
           </div>
         </div>
         <p class="small">Toca el nombre de una alabanza para ver la letra abajo.</p>
@@ -261,39 +263,29 @@
 
         <h2>Agregar / editar alabanza</h2>
 
-        <div style="margin-bottom: 0.5rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <div style="margin-bottom: 0.5rem;">
           <button type="button" class="btn btn-secondary" id="newSongBtn">
             Nueva alabanza
-          </button>
-          <button type="button" class="btn btn-secondary" id="exportBtn">
-            Exportar alabanzas
-          </button>
-          <button type="button" class="btn btn-secondary" id="importBtn">
-            Importar alabanzas
           </button>
         </div>
 
         <form id="songForm">
           <div class="form-group">
             <label for="songName">Nombre de la alabanza</label>
-            <input id="songName" type="text" required placeholder="Ej: Yo quiero más de ti" />
+            <input id="songName" type="text" required placeholder="Ej: Yo quiero más de Ti" />
           </div>
           <div class="form-group">
-            <label for="songTone">Tono (ej: Re mayor, Sol mayor)</label>
-            <input id="songTone" type="text" required placeholder="Ej: Re mayor" />
+            <label for="songTone">Tono (ej: Do, Re, Sol...)</label>
+            <input id="songTone" type="text" required placeholder="Ej: Do, Re, Sol..." />
           </div>
           <div class="form-group">
             <label for="songLyrics">Letra con acordes (texto)</label>
-            <textarea id="songLyrics" required placeholder="Ej:
-[Intro]  D  G  A
-[Verso]
-D            G
-  Tú eres fiel Señor...
-"></textarea>
+            <textarea id="songLyrics" required placeholder="Pega aquí la letra con acordes"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Guardar alabanza</button>
           <p class="small">
-            Las alabanzas se guardan en este dispositivo (navegador) usando almacenamiento local.
+            Tus alabanzas nuevas o editadas se guardan en este dispositivo (navegador) usando almacenamiento local.<br>
+            Las que vienen en el código aparecen siempre en cualquier dispositivo.
           </p>
         </form>
       </section>
@@ -302,20 +294,36 @@ D            G
 
   <script>
     const STORAGE_KEY = "cancioneroAlabanzas";
+
+    // 🔹 ALABANZAS BASE: aparecen SIEMPRE en cualquier dispositivo
+    const BASE_SONGS = [
+      {"id":1765392581354,"name":"Inexplicable","tone":"DO","lyrics":"C                 F    Dm              G\n Que tiene  tu espíritu que cuando me tocas\n            C      Am\nme haces   temblar\n                F    Dm              G\ny que es tu presencia que al manifestarse\n              C  Am\ntengo que llorar\n           C/E            F  Dm                    G\nes que soy      tan   pequeño  que al tu tocarme siento\n           C     Am\nque voy a desmayar\n          C/E      F    Dm                    G\nes que se tu    presencia  no hay aquí en la tierra\n              C  Am\ncon que comparar.\n\nCORO:\n         C/E      F  Dm           G\nno te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F                     G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento\n        C/E   F                     G\n//y cuando me tocas con tu santo espíritu\n               C\nlloro canto y tiemblo//.\n\n\nVERSO II:\n                  F  Dm                   G\nque hay en tu interior, que sientes por mi\n        C        Am\ndime como me amas\n               F     Dm                G\nque misterio existe, que mi duras pruebas\n         C         Am\nconviertes en calma\n            C/E    F    Dm                 G\nyo se que a tu  presencia toda la tierra tiembla\n                     C   Am\ny también tiembla mi alma\n    C/E     F    Dm                G\ny cuando me tocas con tu Santo Espíritu\n            C     Am\nme das la bonanza\n\n CORO:\n           C/E      F  Dm             G\n//no te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F  Dm                  G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento//\n\n        C/E   F    Dm                 G\n//y cuando me tocas con tu santo espíritu\n               C    am     C \nlloro canto y tiemblo//."},
+      {"id":1765395773900,"name":"Quebranta mi corazon","tone":"Do","lyrics":"  C                F/C   G / C\n/ Yo, quiero más de Ti\n                   C      G / B \nY habitar en Tu presencia\n   Am     G#aug          C/ G \nMenguar para que crezcas Tu,\nF        C/ E     Dm7 \n  y cada día     se-ré\n          G \nmas como Tu. /\n\n---coro---\n               Fmaj7  G/F \n/ Quebranta mi co - razón.\n             Em7  Am \nQuebranta mi vi - da\n              Dm7   G    C\nTe entrego mi voluntad a Ti.\n  C/E                Fmaj7  G/F \n   Todo  lo   que soy Señor\n            Em7      Am \ntodo cuanto tengo es tuyo\n             Dm7 \nYo quiero menguar\n  G               C\npara que crezcas Tu. /"},
+      {"id":1765396655331,"name":"Levanto mis Manos","tone":"RE","lyrics":"D           G      A\nLevanto mis manos\n                D      A/C#  Bm\nAunque no tenga fuerzas\n            Em7   G/A\nLevanto mis manos\n                    D      D7\nAunque tenga mil problemas.\n            -CORO-\n                    G\nCuando levanto mis manos\n                A/G\nComienzo a sentir\n       F#m7                Bm7\nUna uncion que me hace cantar\n                   Em7\nCuando levanto mis manos\n                G/A   D    D7\nComienzo a sentir el fuego.\n                   G\nCuando levanto mis manos\n                A/G\nMis cargas se van\n        F#m7   F#7/Bb  Bm7\nNuevas fuerzas Tu me das\n     B7/Eb       Em7\nTodo eso es posible\n                 G/A\nTodo eso es posible\n                   D\nCuando levanto mis manos."},
+      {"id":1765404895556,"name":"has pensado un momento","tone":"Do","lyrics":"C  \nHas pensado un momento\n\nQue Dios tan grande tenemos\n\nQue no existen barreras\n       D7       G \nQue lo puedan detener\n               Dm  G          C\nNo tiene principio, no tiene fin\n               F \nAcaso alguien puede\n              C      Am\nDetenerle un momento\n          D7                G \nCuando te dice, yo te bendeciré.\n\n\nCoro:\nC        F         C  \nPorqué estás tan triste\n         F        G \nPorqué estás llorando\n F           G/F \n//Porqué teniendo\n  Em          Am \nUn Dios tan grande\nDm                      G \nPorqué aun sangra la herida\n        C  \nEn tu corazón//"},
+      {"id":1765405006208,"name":"El esplendor de un rey","tone":"Do","lyrics":"C                    G/B  Am\nEl esplendor de un Rey, vestido en Majestad\n                   F\nLa Tierra alegre está\n                   G\nLa Tierra alegre está\n\nC                    G/B  Am\nCubierto está de luz, venció a la oscuridad\n                F\nY tiembla a Su voz\n              G\nTiembla a Su voz\n\n        C\nCuán Grande es Dios\n G/B            Am\nCántale, Cuán grande es Dios\nF\nY todos lo verán\n      G         C\nCuán grande es Dios\n\n(misma secuencia que en la estrofa I)\n\nDía a Día El está\nY el tiempo está en El\nPrincipio y el fin\nPrincipio y el fin\n\nLa Trinidad en Dios\nEl Padre, Hijo, Espíritu\nCordero y el León\nCordero y el León\n\nCORO 2:\n              C\nY Tu Nombre sobre todo es\n   G/B    Am\nTu eres Digno de alabar\n     F\nY mi ser dirá\n       G        C\nCuan grande es Dios"},
+      {"id":1765405057560,"name":"No basta","tone":"Re","lyrics":"INTRO: Gmaj7\n\nG    A          F#m     Bm  G           A         F#m   Bm\n  No basta solo con cantar,   no basta solo con decir\nG               A  F#m         Bm         Em       A         D\n  No es suficiente solo con querer hacer,    es necesario morir.\n\n\nG     A          F#m   Bm  G            A          F#m   Bm\n  No basta solo con soñar,    no basta solo con  pedir\nG            A     F#m         Bm        A Em       A       \n  No es suficiente solo con querer tener,    es necesario\nD \nmorir.\n\n\nG         A    F#m              Bm\n  Dame tu vida,   esa clase de vida que sabes dar\nG         A    F#m           Bm\n  Dame tu vida,  yo quiero vivir solo para ti\nG          A    F#m    Bm\n  Dame tu vida, resucítame en ti\nEm         A                  D\nYo quiero vivir solo    para ti.\n\n\nFinal\n\n   Em       A             Bm  A  G\nYo quiero vivir solo para ti,\nG           A             D\nYo quiero vivir solo para ti."},
+      {"id":1765405435070,"name":"Honra y gloria","tone":"Re","lyrics":"              D          F#m           Bm\nHay que comprender que la gloria es para Dios,\n            Am   F#   G    A               D\nQue no hay otro como Él, ¡Él es Dios! ¡Él es el Rey!\n                 D      F#m        Bm\nQue si no es por Él, no estaría yo aquí,\n       Am   F#  G          A          D\nNo sabría yo vivir, ni cantar podRía yo.\n                G  Em           D   Bm\nLa gloria es de Él, ¡sólo para Él!3\nEm                                 A    \nY si hoy canto es porque quiero decir:\n\nCORO:\n Bm  C#       D                             F#\nQue toda la gloria, gloria, gloria es para Dios.\n                 Am      Bm     Em\nNo hay otro como Él, un Dios creador.\n           G                     A \nHizo las aguas, el cielo y la tierra,\n             Em  D/F# G       A \nFormó los montes y también a mí.\n                D                      F#\n¡Oh glo…ria, gloria! yo ensalzo tu Nombre;\n              Am       Bm        Em\nBendito seas Tú por tu amor sin fin.\n     G                         D   Bm\nYo alabo y engrandezco tu Nombre.\n              Em           A \nY la gloria a Ti, ¡solo a Ti!\n\n\nVERSO 2 SE REPITE COMO EL PRIMERO\n\n\nPUENTE:\n                Bm                F#\nPorque Tú eres digno de honra y gloria\n             G       Em            C        A7\nY todo mi canto y alabanza es para ti (para ti)"},
+      {"id":1765406507284,"name":"Yo me rindo a el","tone":"Re","lyrics":"D9             A7      A\nTodo a Cristo, yo me entrego\n\nBm     G      A      D            D9\ncon el fin de serle fiel,         para siempre\n\nA7               Bm    G    A      D     \nquiero amarle y agra--darle solo a El.\n\n\nD9           Em7    A7             D   \nYo me rindo a El,   yo me rindo a El,\n\nD               G     Em     A9           D\ntodo a Cristo, yo me entrego quiero serle fiel.\n"},
+      {"id":1765406721592,"name":"El señor es mi pastor","tone":"Re","lyrics":"D               Em\nel Señor es mi pastor\nG  A      D\nnada me faltará\n\nD               Em\nel señor es mi pastor\nG\nen pastos delicados\n Em                A        \nél me hará descansar\n  Bm\njunto a aguas de reposo\nG\nme pastoreará\nA          D\nconfortará mi alma\n Bm                      G\nme guiará por sendas de justicia\n       G    D/A    A   \npor amor de su nombre"},
+      {"id":1765407008975,"name":"Queremos darte gloria","tone":"Re","lyrics":"D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\nG              A \nexaltándote Señor\n\n               D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\n\n\n   A          A7 \nexaltándote Señor\n\n            D \nGrande eres tú\n        A/C#           Bm  \nGrandes tus milagros son\n                 G  Em \nNo hay otro como tú\nA                A7 \nNo hay otro como tu\n\n            D \nGrande eres tú,\n     A/C#           Bm  \nMaravillas haces tú,\n                 G  Em \nNo hay otro como tú\n\nA      A7         D \nNo hay otro como tu"}
+    ];
+
     let songs = [];
     let selectedSongId = null;
 
     function loadSongs() {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        songs = [];
-        return;
-      }
-      try {
-        songs = JSON.parse(raw) || [];
-      } catch (e) {
-        console.error("Error al leer alabanzas:", e);
-        songs = [];
+      if (raw) {
+        try {
+          songs = JSON.parse(raw) || [];
+        } catch (e) {
+          console.error("Error leyendo almacenamiento local, uso BASE_SONGS:", e);
+          songs = BASE_SONGS.map(s => ({ ...s }));
+        }
+      } else {
+        // 👇 Primer uso en un dispositivo nuevo: se cargan las alabanzas base
+        songs = BASE_SONGS.map(s => ({ ...s }));
       }
     }
 
@@ -373,6 +381,7 @@ D            G
 
         item.appendChild(button);
         item.appendChild(tone);
+
         listEl.appendChild(item);
       });
     }
@@ -443,41 +452,6 @@ D            G
       document.getElementById("songLyrics").value = "";
     }
 
-    // 🔹 EXPORTAR: muestra un JSON para copiar
-    function exportSongs() {
-      if (!songs.length) {
-        alert("No hay alabanzas para exportar.");
-        return;
-      }
-      const data = JSON.stringify(songs);
-      navigator.clipboard?.writeText(data).then(
-        () => {
-          alert("Alabanzas copiadas al portapapeles. Pégalas en un bloc de notas o en la app de destino.");
-        },
-        () => {
-          const result = prompt("Copia este texto y guárdalo en un bloc de notas:", data);
-          if (!result) return;
-        }
-      );
-    }
-
-    // 🔹 IMPORTAR: pega el JSON exportado
-    function importSongs() {
-      const input = prompt("Pega aquí el texto que exportaste con las alabanzas:");
-      if (!input) return;
-      try {
-        const parsed = JSON.parse(input);
-        if (!Array.isArray(parsed)) throw new Error("Formato inválido");
-        songs = parsed;
-        saveSongs();
-        renderSongList();
-        selectedSongId = null;
-        alert("Alabanzas importadas correctamente ✅");
-      } catch (e) {
-        alert("El texto pegado no es válido. Asegúrate de pegar exactamente lo que exportaste.");
-      }
-    }
-
     function setup() {
       loadSongs();
       renderSongList();
@@ -486,8 +460,6 @@ D            G
       document.getElementById("filterTone").addEventListener("input", renderSongList);
       document.getElementById("filterName").addEventListener("input", renderSongList);
       document.getElementById("newSongBtn").addEventListener("click", startNewSong);
-      document.getElementById("exportBtn").addEventListener("click", exportSongs);
-      document.getElementById("importBtn").addEventListener("click", importSongs);
     }
 
     document.addEventListener("DOMContentLoaded", setup);
