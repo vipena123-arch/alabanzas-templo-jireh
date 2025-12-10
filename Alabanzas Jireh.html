@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alabanzas Templo Jireh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f4f6;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 1rem 1.2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    main {
+      padding: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 1rem;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #111827;
+    }
+
+    /* Panel de lista */
+    .songs-panel {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .songs-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .songs-filters input {
+      flex: 1;
+      min-width: 130px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.45rem 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: monospace;
+      line-height: 1.4;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px #2563eb33;
+    }
+
+    .song-list {
+      margin-top: 0.5rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 0.5rem;
+    }
+
+    .song-item {
+      padding: 0.4rem 0.3rem;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .song-item button {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font-size: 0.95rem;
+      color: #1d4ed8;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .song-item small {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .song-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Panel de detalle / nueva canción */
+    .detail-panel {
+      flex: 1.2;
+      min-width: 0;
+    }
+
+    .detail-box {
+      border-radius: 10px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      padding: 0.75rem;
+      min-height: 140px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .detail-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    .detail-tone {
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .form-group {
+      margin-bottom: 0.6rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+      margin-right: 0.5rem;
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active {
+      transform: translateY(1px);
+    }
+
+    .small {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Alabanzas Templo Jireh</h1>
+    <p>Organiza tus alabanzas por tono y accede rápidamente a su letra y acordes</p>
+  </header>
+
+  <main>
+    <div class="layout">
+      <!-- Panel izquierdo: lista y filtros -->
+      <section class="panel songs-panel">
+        <h2>Listado de alabanzas</h2>
+
+        <div class="songs-filters">
+          <div style="flex:1">
+            <label for="filterTone">Filtrar por tono</label>
+            <input id="filterTone" type="text" placeholder="Ej: Re mayor, Sol mayor" />
+          </div>
+          <div style="flex:1">
+            <label for="filterName">Buscar por nombre o palabra de la letra</label>
+            <input id="filterName" type="text" placeholder="Ej: 'menguar', 'fiel', 'pacto'..." />
+          </div>
+        </div>
+        <p class="small">Toca el nombre de una alabanza para ver la letra abajo.</p>
+
+        <div id="songList" class="song-list">
+          <!-- Aquí se renderiza la lista -->
+        </div>
+      </section>
+
+      <!-- Panel derecho: detalle y formulario -->
+      <section class="panel detail-panel">
+        <h2>Detalle de la alabanza</h2>
+        <div class="detail-header">
+          <div>
+            <div id="detailTitle" class="detail-title">Sin alabanza seleccionada</div>
+            <div id="detailTone" class="detail-tone"></div>
+          </div>
+        </div>
+        <div id="detailLyrics" class="detail-box">
+          Aquí aparecerá la letra con acordes de la alabanza seleccionada.
+        </div>
+
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e5e7eb;" />
+
+        <h2>Agregar / editar alabanza</h2>
+
+        <!-- 🔹 Botón NUEVA ALABANZA para no sobreescribir la anterior -->
+        <div style="margin-bottom: 0.5rem;">
+          <button type="button" class="btn btn-secondary" id="newSongBtn">
+            Nueva alabanza
+          </button>
+        </div>
+
+        <form id="songForm">
+          <div class="form-group">
+            <label for="songName">Nombre de la alabanza</label>
+            <input id="songName" type="text" required placeholder="Ej: Yo quiero más de ti" />
+          </div>
+          <div class="form-group">
+            <label for="songTone">Tono (ej: Re mayor, Sol mayor)</label>
+            <input id="songTone" type="text" required placeholder="Ej: Re mayor" />
+          </div>
+          <div class="form-group">
+            <label for="songLyrics">Letra con acordes (texto)</label>
+            <textarea id="songLyrics" required placeholder="Ej:
+[Intro]  D  G  A
+[Verso]
+D            G
+  Tú eres fiel Señor...
+"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar alabanza</button>
+          <p class="small">
+            Las alabanzas se guardan en este dispositivo (navegador) usando almacenamiento local.
+          </p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Clave para localStorage
+    const STORAGE_KEY = "cancioneroAlabanzas";
+
+    let songs = [];
+    let selectedSongId = null;
+
+    function loadSongs() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        songs = [];
+        return;
+      }
+      try {
+        songs = JSON.parse(raw) || [];
+      } catch (e) {
+        console.error("Error al leer alabanzas:", e);
+        songs = [];
+      }
+    }
+
+    function saveSongs() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(songs));
+    }
+
+    function renderSongList() {
+      const listEl = document.getElementById("songList");
+      const filterTone = document.getElementById("filterTone").value.trim().toLowerCase();
+      const filterName = document.getElementById("filterName").value.trim().toLowerCase();
+
+      listEl.innerHTML = "";
+
+      // Ordenar por tono y luego por nombre
+      const sorted = [...songs].sort((a, b) => {
+        const toneA = (a.tone || "").toLowerCase();
+        const toneB = (b.tone || "").toLowerCase();
+        if (toneA < toneB) return -1;
+        if (toneA > toneB) return 1;
+        const nameA = (a.name || "").toLowerCase();
+        const nameB = (b.name || "").toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+
+      const filtered = sorted.filter(song => {
+        const tone = (song.tone || "").toLowerCase();
+        const name = (song.name || "").toLowerCase();
+        const lyrics = (song.lyrics || "").toLowerCase();
+
+        const matchesTone = !filterTone || tone.includes(filterTone);
+
+        // Buscar en nombre + letra + tono
+        const combinedText = `${name} ${lyrics} ${tone}`;
+        const matchesSearch = !filterName || combinedText.includes(filterName);
+
+        return matchesTone && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = "<p class='small'>No hay alabanzas con esos filtros.</p>";
+        return;
+      }
+
+      filtered.forEach(song => {
+        const item = document.createElement("div");
+        item.className = "song-item";
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = song.name || "(Sin nombre)";
+        button.onclick = () => showSongDetail(song.id);
+
+        const tone = document.createElement("small");
+        tone.textContent = song.tone || "";
+
+        item.appendChild(button);
+        item.appendChild(tone);
+
+        listEl.appendChild(item);
+      });
+    }
+
+    function showSongDetail(id) {
+      const song = songs.find(s => s.id === id);
+      selectedSongId = id;
+
+      const titleEl = document.getElementById("detailTitle");
+      const toneEl = document.getElementById("detailTone");
+      const lyricsEl = document.getElementById("detailLyrics");
+
+      if (!song) {
+        titleEl.textContent = "Alabanza no encontrada";
+        toneEl.textContent = "";
+        lyricsEl.textContent = "";
+        return;
+      }
+
+      titleEl.textContent = song.name;
+      toneEl.textContent = song.tone ? `Tono: ${song.tone}` : "";
+      lyricsEl.textContent = song.lyrics || "";
+
+      // También rellenamos el formulario con la alabanza seleccionada para editarla
+      document.getElementById("songName").value = song.name || "";
+      document.getElementById("songTone").value = song.tone || "";
+      document.getElementById("songLyrics").value = song.lyrics || "";
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("songName").value.trim();
+      const tone = document.getElementById("songTone").value.trim();
+      const lyrics = document.getElementById("songLyrics").value;
+
+      if (!name || !tone || !lyrics) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      // Si hay una alabanza seleccionada, la editamos; si no, creamos una nueva
+      if (selectedSongId !== null) {
+        const idx = songs.findIndex(s => s.id === selectedSongId);
+        if (idx !== -1) {
+          songs[idx].name = name;
+          songs[idx].tone = tone;
+          songs[idx].lyrics = lyrics;
+        }
+      } else {
+        const newSong = {
+          id: Date.now(),
+          name,
+          tone,
+          lyrics
+        };
+        songs.push(newSong);
+        selectedSongId = newSong.id;
+      }
+
+      saveSongs();
+      renderSongList();
+      showSongDetail(selectedSongId);
+      alert("Alabanza guardada ✅");
+    }
+
+    // 🔹 FUNCION: NUEVA ALABANZA (para no sobreescribir la anterior)
+    function startNewSong() {
+      selectedSongId = null;
+      document.getElementById("songForm").reset();
+      // Opcional: mantener texto de ejemplo en textarea
+      document.getElementById("songLyrics").value = "";
+      // No tocamos el detalle para que sigas viendo la anterior si quieres
+    }
+
+    function setup() {
+      loadSongs();
+      renderSongList();
+
+      document.getElementById("songForm").addEventListener("submit", handleFormSubmit);
+      document.getElementById("filterTone").addEventListener("input", renderSongList);
+      document.getElementById("filterName").addEventListener("input", renderSongList);
+      document.getElementById("newSongBtn").addEventListener("click", startNewSong);
+    }
+
+    document.addEventListener("DOMContentLoaded", setup);
+  </script>
+</body>
+</html>
