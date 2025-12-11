@@ -15,65 +15,112 @@
     .panel { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1rem; }
     .panel h2 { margin-top: 0; font-size: 1.1rem; color: #111827; }
     .songs-panel { flex: 1; min-width: 0; }
-    .songs-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
-    .songs-filters input { flex: 1; min-width: 130px; }
-    label { font-size: 0.85rem; color: #4b5563; }
-    input[type="text"], textarea { width: 100%; box-sizing: border-box; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid #d1d5db; font-size: 0.9rem; }
-    textarea { resize: vertical; min-height: 120px; font-family: monospace; line-height: 1.4; }
-    input[type="text"]:focus, textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb33; }
-    .song-list { margin-top: 0.5rem; max-height: 60vh; overflow-y: auto; border-top: 1px solid #e5e7eb; padding-top: 0.5rem; }
-    .song-item { padding: 0.4rem 0.3rem; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; }
-    .song-item button { border: none; background: none; padding: 0; margin: 0; text-align: left; font-size: 0.95rem; color: #1d4ed8; text-decoration: underline; cursor: pointer; }
-    .song-item small { font-size: 0.75rem; color: #6b7280; }
-    .song-item:last-child { border-bottom: none; }
-    .detail-panel { flex: 1.2; min-width: 0; }
     
-    /* CORRECCIÓN AQUI: white-space: pre; evita que el texto se rompa */
+    /* ESTILOS NUEVOS PARA LOS BOTONES DE TONO */
+    .tone-filters {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto; /* Permite deslizar si no caben en pantalla */
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      -webkit-overflow-scrolling: touch; /* Suavidad en iPad */
+    }
+    
+    .tone-btn {
+      flex: 0 0 auto;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .tone-btn:hover { background: #e5e7eb; }
+    
+    .tone-btn.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    /* Buscador de texto */
+    .search-box input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem; /* Texto más grande para iPad */
+    }
+
+    .song-list { margin-top: 0.5rem; max-height: 60vh; overflow-y: auto; border-top: 1px solid #e5e7eb; padding-top: 0.5rem; }
+    .song-item { padding: 0.6rem 0.3rem; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; }
+    .song-item button { border: none; background: none; padding: 0; margin: 0; text-align: left; font-size: 1rem; color: #1d4ed8; text-decoration: underline; cursor: pointer; }
+    .song-item small { font-size: 0.8rem; color: #6b7280; }
+    
+    .detail-panel { flex: 1.2; min-width: 0; }
     .detail-box { 
       border-radius: 10px; 
       background: #f9fafb; 
       border: 1px solid #e5e7eb; 
       padding: 0.75rem; 
       min-height: 140px; 
-      white-space: pre; /* CAMBIO CLAVE: fuerza scroll horizontal en vez de salto de línea */
-      font-family: Menlo, Monaco, Consolas, "Courier New", monospace; /* Fuente mejorada para iOS */
-      font-size: 0.9rem; 
-      overflow-x: auto; /* Permite deslizar si la linea es larga */
+      white-space: pre; 
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace; 
+      font-size: 0.95rem; /* Un poco más grande para leer mejor */
+      overflow-x: auto; 
     }
-
+    
     .detail-header { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.4rem; }
-    .detail-title { font-weight: 600; font-size: 1rem; color: #111827; }
-    .detail-tone { font-size: 0.8rem; color: #4b5563; }
-    .form-group { margin-bottom: 0.6rem; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.45rem 0.9rem; border-radius: 999px; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; }
+    .detail-title { font-weight: 600; font-size: 1.1rem; color: #111827; }
+    .detail-tone { font-size: 0.9rem; color: #4b5563; }
+    
+    .form-group { margin-bottom: 0.8rem; }
+    .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 500; }
+    
+    input[type="text"], textarea, select { 
+      width: 100%; box-sizing: border-box; padding: 0.6rem; 
+      border-radius: 8px; border: 1px solid #d1d5db; font-size: 1rem; 
+    }
+    textarea { resize: vertical; min-height: 150px; font-family: monospace; line-height: 1.4; }
+    
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1rem; border-radius: 999px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 500; }
     .btn-primary { background: #2563eb; color: white; }
-    .btn-secondary { background: #e5e7eb; color: #111827; margin-right: 0.5rem; }
+    .btn-secondary { background: #e5e7eb; color: #111827; margin-right: 0.5rem; margin-bottom: 0.5rem;}
     .danger-zone { margin-top: 2rem; border-top: 1px solid #fee2e2; padding-top: 1rem; }
     .btn-danger { background: #fee2e2; color: #991b1b; font-size: 0.8rem; }
-    .small { font-size: 0.75rem; color: #6b7280; }
   </style>
 </head>
 <body>
   <header>
     <h1>Alabanzas Templo Jireh</h1>
-    <p>Organiza tus alabanzas por tono y accede rápidamente a su letra y acordes</p>
+    <p>Toca un tono para filtrar o busca por letra</p>
   </header>
 
   <main>
     <div class="layout">
       <section class="panel songs-panel">
-        <h2>Listado de alabanzas</h2>
-        <div class="songs-filters">
-          <div style="flex:1">
-            <label for="filterTone">Filtrar por tono</label>
-            <input id="filterTone" type="text" placeholder="Ej: Re mayor, Sol mayor" />
-          </div>
-          <div style="flex:1">
-            <label for="filterName">Buscar</label>
-            <input id="filterName" type="text" placeholder="Nombre o letra..." />
-          </div>
+        
+        <label style="display:block; margin-bottom:0.5rem; font-weight:600; color:#374151;">Filtrar por Tono:</label>
+        <div class="tone-filters" id="toneFilterContainer">
+          <button class="tone-btn active" onclick="filterByTone('ALL', this)">Todos</button>
+          <button class="tone-btn" onclick="filterByTone('C', this)">Do (C)</button>
+          <button class="tone-btn" onclick="filterByTone('D', this)">Re (D)</button>
+          <button class="tone-btn" onclick="filterByTone('E', this)">Mi (E)</button>
+          <button class="tone-btn" onclick="filterByTone('F', this)">Fa (F)</button>
+          <button class="tone-btn" onclick="filterByTone('G', this)">Sol (G)</button>
+          <button class="tone-btn" onclick="filterByTone('A', this)">La (A)</button>
+          <button class="tone-btn" onclick="filterByTone('B', this)">Si (B)</button>
         </div>
-        <p class="small">Toca el nombre de una alabanza para ver la letra abajo.</p>
+
+        <div class="search-box">
+          <label for="filterName" style="display:none">Buscar</label>
+          <input id="filterName" type="text" placeholder="🔍 Buscar por nombre o letra..." />
+        </div>
+
         <div id="songList" class="song-list"></div>
       </section>
 
@@ -98,13 +145,31 @@
 
         <form id="songForm">
           <div class="form-group">
-            <label for="songName">Nombre</label>
+            <label for="songName">Nombre de la alabanza</label>
             <input id="songName" type="text" required placeholder="Ej: Yo quiero más de ti" />
           </div>
+          
           <div class="form-group">
             <label for="songTone">Tono</label>
-            <input id="songTone" type="text" required placeholder="Ej: Re mayor" />
+            <select id="songTone" required>
+                <option value="">-- Selecciona un tono --</option>
+                <option value="Do Mayor">Do Mayor (C)</option>
+                <option value="Do Menor">Do Menor (Cm)</option>
+                <option value="Re Mayor">Re Mayor (D)</option>
+                <option value="Re Menor">Re Menor (Dm)</option>
+                <option value="Mi Mayor">Mi Mayor (E)</option>
+                <option value="Mi Menor">Mi Menor (Em)</option>
+                <option value="Fa Mayor">Fa Mayor (F)</option>
+                <option value="Fa Menor">Fa Menor (Fm)</option>
+                <option value="Sol Mayor">Sol Mayor (G)</option>
+                <option value="Sol Menor">Sol Menor (Gm)</option>
+                <option value="La Mayor">La Mayor (A)</option>
+                <option value="La Menor">La Menor (Am)</option>
+                <option value="Si Mayor">Si Mayor (B)</option>
+                <option value="Si Menor">Si Menor (Bm)</option>
+            </select>
           </div>
+
           <div class="form-group">
             <label for="songLyrics">Letra con acordes</label>
             <textarea id="songLyrics" required placeholder="Ej: [Intro] D G A ..."></textarea>
@@ -113,7 +178,7 @@
         </form>
 
         <div class="danger-zone">
-            <p class="small">¿No aparecen las canciones o sale mal la letra?</p>
+            <p class="small">¿Algo salió mal?</p>
             <button class="btn btn-danger" onclick="resetToDefaults()">Restaurar canciones originales</button>
         </div>
       </section>
@@ -123,19 +188,29 @@
   <script>
     const STORAGE_KEY = "cancioneroAlabanzas";
 
-    // LISTA ACTUALIZADA CON "NO BASTA" CORREGIDA
+    // BASE DE DATOS ACTUALIZADA CON TUS CANCIONES
     const CANCIONES_PREDEFINIDAS = [{"id":1765392581354,"name":"Inexplicable","tone":"DO","lyrics":"C                 F    Dm              G\n Que tiene  tu espíritu que cuando me tocas\n            C      Am\nme haces   temblar\n                F    Dm              G\ny que es tu presencia que al manifestarse\n              C  Am\ntengo que llorar\n           C/E            F  Dm                    G\nes que soy      tan   pequeño  que al tu tocarme siento\n           C     Am\nque voy a desmayar\n          C/E      F    Dm                    G\nes que se tu    presencia  no hay aquí en la tierra\n              C  Am\ncon que comparar.\n\nCORO:\n         C/E      F  Dm           G\nno te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F                     G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento\n        C/E   F                     G\n//y cuando me tocas con tu santo espíritu\n               C\nlloro canto y tiemblo//.\n\n\nVERSO II:\n                  F  Dm                   G\nque hay en tu interior, que sientes por mi\n        C        Am\ndime como me amas\n               F     Dm                G\nque misterio existe, que mi duras pruebas\n         C         Am\nconviertes en calma\n            C/E    F    Dm                 G\nyo se que a tu  presencia toda la tierra tiembla\n                     C   Am\ny también tiembla mi alma\n    C/E     F    Dm                G\ny cuando me tocas con tu Santo Espíritu\n            C     Am\nme das la bonanza\n\n CORO:\n           C/E      F  Dm             G\n//no te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F  Dm                  G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento//\n\n        C/E   F    Dm                 G\n//y cuando me tocas con tu santo espíritu\n               C    am     C \nlloro canto y tiemblo//."},{"id":1765395773900,"name":"Quebranta mi corazon","tone":"Do","lyrics":"  C                F/C   G / C\n/ Yo, quiero más de Ti\n                   C      G / B \nY habitar en Tu presencia\n   Am     G#aug          C/ G \nMenguar para que crezcas Tu,\nF        C/ E     Dm7 \n  y cada día     se-ré\n          G \nmas como Tu. /\n\n---coro---\n               Fmaj7  G/F \n/ Quebranta mi co - razón.\n             Em7  Am \nQuebranta mi vi - da\n              Dm7   G    C\nTe entrego mi voluntad a Ti.\n  C/E                Fmaj7  G/F \n   Todo  lo   que soy Señor\n            Em7      Am \ntodo cuanto tengo es tuyo\n             Dm7 \nYo quiero menguar\n  G               C\npara que crezcas Tu. /"},{"id":1765396655331,"name":"Levanto mis Manos","tone":"RE","lyrics":"D           G      A\nLevanto mis manos\n                D      A/C#  Bm\nAunque no tenga fuerzas\n            Em7   G/A\nLevanto mis manos\n                    D      D7\nAunque tenga mil problemas.\n            -CORO-\n                    G\nCuando levanto mis manos\n                A/G\nComienzo a sentir\n       F#m7                Bm7\nUna uncion que me hace cantar\n                   Em7\nCuando levanto mis manos\n                G/A   D    D7\nComienzo a sentir el fuego.\n                   G\nCuando levanto mis manos\n                A/G\nMis cargas se van\n        F#m7   F#7/Bb  Bm7\nNuevas fuerzas Tu me das\n     B7/Eb       Em7\nTodo eso es posible\n                 G/A\nTodo eso es posible\n                   D\nCuando levanto mis manos."},{"id":1765404895556,"name":"has pensado un momento","tone":"Do","lyrics":"C  \nHas pensado un momento\n\nQue Dios tan grande tenemos\n\nQue no existen barreras\n       D7       G \nQue lo puedan detener\n               Dm  G          C\nNo tiene principio, no tiene fin\n               F \nAcaso alguien puede\n              C      Am\nDetenerle un momento\n          D7                G \nCuando te dice, yo te bendeciré.\n\n\nCoro:\nC        F         C  \nPorqué estás tan triste\n         F        G \nPorqué estás llorando\n F           G/F \n//Porqué teniendo\n  Em          Am \nUn Dios tan grande\nDm                      G \nPorqué aun sangra la herida\n        C  \nEn tu corazón//"},{"id":1765405006208,"name":"El esplendor de un rey","tone":"Do","lyrics":"C                    G/B  Am\nEl esplendor de un Rey, vestido en Majestad\n                   F\nLa Tierra alegre está\n                   G\nLa Tierra alegre está\n\nC                    G/B  Am\nCubierto está de luz, venció a la oscuridad\n                F\nY tiembla a Su voz\n              G\nTiembla a Su voz\n\n        C\nCuán Grande es Dios\n G/B            Am\nCántale, Cuán grande es Dios\nF\nY todos lo verán\n      G         C\nCuán grande es Dios\n\n(misma secuencia que en la estrofa I)\n\nDía a Día El está\nY el tiempo está en El\nPrincipio y el fin\nPrincipio y el fin\n\nLa Trinidad en Dios\nEl Padre, Hijo, Espíritu\nCordero y el León\nCordero y el León\n\nCORO 2:\n              C\nY Tu Nombre sobre todo es\n   G/B    Am\nTu eres Digno de alabar\n     F\nY mi ser dirá\n       G        C\nCuan grande es Dios"},{"id":1765405057560,"name":"No basta","tone":"Re","lyrics":"INTRO: Gmaj7\n\nG    A          F#m     Bm  G           A         F#m   Bm\n  No basta solo con cantar,   no basta solo con decir\nG               A  F#m         Bm         Em       A         D\n  No es suficiente solo con querer hacer,    es necesario morir.\n\n\nG     A          F#m   Bm  G            A          F#m   Bm\n  No basta solo con soñar,    no basta solo con  pedir\nG            A     F#m         Bm        A Em       A       \n  No es suficiente solo con querer tener,    es necesario\nD \nmorir.\n\n\nG         A    F#m              Bm\n  Dame tu vida,   esa clase de vida que sabes dar\nG         A    F#m           Bm\n  Dame tu vida,  yo quiero vivir solo para ti\nG          A    F#m    Bm\n  Dame tu vida, resucítame en ti\nEm         A                  D\nYo quiero vivir solo    para ti.\n\n\nFinal\n\n   Em       A             Bm  A  G\nYo quiero vivir solo para ti,\nG           A             D\nYo quiero vivir solo para ti."},{"id":1765405435070,"name":"Honra y gloria","tone":"Re","lyrics":"              D          F#m           Bm\nHay que comprender que la gloria es para Dios,\n            Am   F#   G    A               D\nQue no hay otro como Él, ¡Él es Dios! ¡Él es el Rey!\n                 D      F#m        Bm\nQue si no es por Él, no estaría yo aquí,\n       Am   F#  G          A          D\nNo sabría yo vivir, ni cantar podRía yo.\n                G  Em           D   Bm\nLa gloria es de Él, ¡sólo para Él!3\nEm                                 A    \nY si hoy canto es porque quiero decir:\n\nCORO:\n Bm  C#       D                             F#\nQue toda la gloria, gloria, gloria es para Dios.\n                 Am      Bm     Em\nNo hay otro como Él, un Dios creador.\n           G                     A \nHizo las aguas, el cielo y la tierra,\n             Em  D/F# G       A \nFormó los montes y también a mí.\n                D                      F#\n¡Oh glo…ria, gloria! yo ensalzo tu Nombre;\n              Am       Bm        Em\nBendito seas Tú por tu amor sin fin.\n     G                         D   Bm\nYo alabo y engrandezco tu Nombre.\n              Em           A \nY la gloria a Ti, ¡solo a Ti!\n\n\nVERSO 2 SE REPITE COMO EL PRIMERO\n\n\nPUENTE:\n                Bm                F#\nPorque Tú eres digno de honra y gloria\n             G       Em            C        A7\nY todo mi canto y alabanza es para ti (para ti)"},{"id":1765406507284,"name":"Yo me rindo a el","tone":"Re","lyrics":"D9             A7      A\nTodo a Cristo, yo me entrego\n\nBm     G      A      D            D9\ncon el fin de serle fiel,         para siempre\n\nA7               Bm    G    A      D     \nquiero amarle y agra--darle solo a El.\n\n\nD9           Em7    A7             D   \nYo me rindo a El,   yo me rindo a El,\n\nD               G     Em     A9           D\ntodo a Cristo, yo me entrego quiero serle fiel.\n"},{"id":1765406721592,"name":"El señor es mi pastor","tone":"Re","lyrics":"D               Em\nel Señor es mi pastor\nG  A      D\nnada me faltará\n\nD               Em\nel señor es mi pastor\nG\nen pastos delicados\n Em                A        \nél me hará descansar\n  Bm\njunto a aguas de reposo\nG\nme pastoreará\nA          D\nconfortará mi alma\n Bm                      G\nme guiará por sendas de justicia\n       G    D/A    A   \npor amor de su nombre"},{"id":1765407008975,"name":"Queremos darte gloria","tone":"Re","lyrics":"D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\nG              A \nexaltándote Señor\n\n               D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\n\n\n   A          A7 \nexaltándote Señor\n\n            D \nGrande eres tú\n        A/C#           Bm  \nGrandes tus milagros son\n                 G  Em \nNo hay otro como tú\nA                A7 \nNo hay otro como tu\n\n            D \nGrande eres tú,\n     A/C#           Bm  \nMaravillas haces tú,\n                 G  Em \nNo hay otro como tú\n\nA      A7         D \nNo hay otro como tu"},{"id":1765426456039,"name":"renuevame","tone":"Re","lyrics":"D       G   A       D\nRenuevame Señor Jesus\n  Em                A\nya no quiero ser igual\nD       G   A       D\nRenuevame Señor Jesus\n   Em           A     A/C#m\npon en mí tu corazon\n\n\nCoro:\n  D                   A/C#m   Bm     \n//Porque todo lo que hay dentro de mi\nG     Em          A            A/C#m\nnecesita ser cambiado señor\nD                    A/C#m       Bm       \nPorque todo lo que hay dentro de mi orazon\nG     A          D\nnecesita mas de ti.//"},{"id":1765430573519,"name":"Si mi dios no es real","tone":"RE","lyrics":"D                Em  A                 D   Bm  \nSi mi Dios no es real ¿quién te da la vida?\n                 Em  A                    D7\nSi mi Dios no es real ¿quién contesta tu oración?\n    D/E     D/F#     G  Em             D   Bm\n// Si mi Dios no es real ¿quién te bendice?\n                   Em        A         D\nYo sé que él vive hoy, vive hoy, vive hoy //"},{"id":1765430766405,"name":"Yo quiero mas y mas de cristo","tone":"Re","lyrics":"          D     A          D\nYo quiero más y más de Cristo,\n          D     Bm  Em  A\nYo quiero más de su poder,\n          D     D7  G     Em\nYo quiero más de su presencia,\n          D     A          D\nYo quiero más y más de Él.\n"},{"id":1765430873050,"name":"De tal manera me amo","tone":"Re","lyrics":"    D              A\nDe tal manera me amo\n       Em7       Bm   A\nQue su vida no escatimo\n    D                      A\nHasta el final él se entregó\n       G              A          D\nY a la muerte fue porque él me amo\n\n    D              A\nDe tal manera me amo\n            Em7           Bm7      A\nQue no hay forma en que podré pagar\n    D                    A\nEl precio de su grande amor\n     G            A        D\nPero toda mi alma quiero dar\nCORO:\n         Bm     A    D\nPor su amor, yo viviré\n        Bm     A     D\nDe su amor, yo cantaré\n          Bm   A    G\nCon mi Jesús caminaré\n               A     G\nPorque él me amó a mí\n\n         Bm     A    D\nPor su amor, yo viviré\n        Bm     A     D\nDe su amor, yo cantaré\n          Bm   A    G\nCon mi Jesús caminaré\n              A       G  A           D  A\nPorque él murió por mí... Le seguiré\n\n         C#m    B    E\nPor su amor, yo viviré\n        C#m    B     E\nDe su amor, yo cantaré\n          C#m  B    E\nCon mi Jesús caminaré\n               B     E\nPorque él me amó a mí\n\n         C#m    B    E\nPor su amor, yo viviré\n        C#m    B     E\nDe su amor, yo cantaré\n          C#m  B    E\nCon mi Jesús caminaré\n              B       A  B         E\nPorque él murió por mí... Le seguiré"},{"id":1765435041721,"name":"Te alabo","tone":"Re","lyrics":"          D        A          D\ncuando estoy en angustias y pruebas,\n      G             A            D\ny la tentacion me quiere aprisionar,\n      G      A/G        F#m Bm \nel espiritu santo, me guia.\n       Em           A           D\nme sostienen no me dejan claudicar\n\n     D   F#  G    Em     D\nte alabo, te alabo mi alma\n     Bm              A\nno se cansa de alabarte\n     D   f#  G   Em          D  Bm  Em A\nte alabo, te alabo, mientras vida, exista\n       D\nen mi ser.\n\n     D      A           D\nte alabo señor, yo te alabo\n        G        A          D\npor que eres precioso para mi,\n         G      A/G        F#m Bm \npor que junto a ti voy caminando,\n         Em           A            D\npor que siento tu presencia en mi ser.\n\n     D   F#  G    Em     D\nte alabo, te alabo mi alma\n     Bm              A\nno se cansa de alabarte\n     D   f#  G   Em          D  Bm  Em A\nte alabo, te alabo, mientras vida, exista\n       D\nen mi ser."},{"id":1765435815456,"name":"Tu prooveras","tone":"Mi","lyrics":"    E\nEn medio del desierto\nB/E                E\nProsperaste a Abraham\n     E/A    \nY al pueblo que migraba\n     B/A          E/A\nDel cielo, diste pan\n      C#m\nSi en fosa de leones\n       E/G#\nDaniel pudo descansar\n      A             B   E\n¿Por qué me he de preocupar?\n\n   E\nMoisés golpeó la roca\nB/E                E\nY le diste de beber\n   E/A\nY Ana siendo estéril\n     B/A          E/A\nCargó, en brazos, a un bebé\n  C#m\nDavid frente al gigante\n      E/G#\nPor la fe, pudo entender\n         A        B   E\nQue, en Ti, consumado fue\n\nCoro:\n\n         E\nTú proveerás\n          A\nTú proveerás\nC#m                      B\nCristo, suples mi necesidad\n     E/G#\nNo temeré\n             A\nTodo va a estar bien\n     C#              B             E\nPues Tu promesa es siempre sí y amén\n\n    E\nLa viuda de Sarepta\nB/E                E\nPudo ver tu provisión\n     E/A\nCon solo una palabra\n    B/A     E/A    \nLázaro resucitó\n  C#m\nJosué vio derribarse\n     E/G#\nEsa muralla en Jericó\n    A       B    E\nY así lo veremos hoy\n    A       B    E\nY así lo veremos hoy\n\nCoro:\n\n          E\nTú proveerás\n          A\nTú proveerás\nC#m                      B\nCristo, suples mi necesidad\n      E/G#\nNo temeré\n             A\nTodo va a estar bien\nC#m            B             A\nTu promesa es siempre sí y amén\n\n          E\nTú proveerás\n          A\nTú proveerás\nC#m                      B\nCristo, suples mi necesidad\n      E/G#\nNo temeré\n             A\nTodo va a estar bien\nC#m           B               E\nTu promesa es siempre sí y amén\n\n\n     A\nCorazón, no te afanes\n      C#m      B\nTu esperanza es firme\n      A\nAlma mía, no calles\n   C#m  B\nÉl resucitó\n       A\nMente mía, recuerda\n          C#m               B           A\nQue la victoria está en el nombre del Señor\n            B\nUh, oh, oh-oh-oh, oh\n\n          C#m               B           A\nQue la victoria está en el nombre del Señor\n            B\nUh, oh, oh-oh-oh, oh\n\n[Fnal]\n\n          C#m               B           A\nQue la victoria está en el nombre del Señor\n          C#m               B           A\nQue la victoria está en el nombre del Señor\n          C#m               B           A\nQue la victoria está en el nombre del Señor"},{"id":1765436266527,"name":"La victoria es tuya","tone":"Mi","lyrics":"E                 B      La(add9)      E      C#m\nLevanta tu mirada ahora  no estés triste oh no\n                     B7                      A \nPorque abandonas todo así y dices Dios me olvidó\n                          E \nEl nunca olvida al que llamó\n\n\nE                  B7    A                 E \nAhora esta contigo aquí El cambió tú cautiverio\nC#m                B7                (E/G#   )La\nReprende al devorador levanta tu cabeza  ahora\n                 E/B                      E   (A/C#  , SI/RE#) (E , E )\nVen declara tú victoria y bendición recibirás\n\nCoro:\n                   B    E \nSi estás caído Él te levanta (Él te levanta)\n                          F#m \nSi estás llorando Él te consuela\n                          A                    B7     E \nSi estás oprimido Él te liberta Él es Dios de ayer y ahora\n                A/C#     SI/RE#   E \nProclama yo soy más que vence...dor \n                        F#m \nÉl en su palabra lo prometió\n                                   A                     B7             E \nSalta las barreras y atraviesa el abismo sal de ese calabozo sé un ganador\n              A/C#   SI/RE#   E                             F#m \nEl león de la tribu de.. Judá entra en la batalla para ganar\n                             A           B7               E \nMira a tu enemigo ya lo derrotó tú eres libre y puedes volar\nB                            E     B7 \nvuela ahora en las alas del viento oh\n               E   D#   C#m     G# F#m         B7       E \nLa victoria es tuya es tuya es tuya la victoria es tuya\n2º Estrofa:\n                    B    A                 E \nAhora esta contigo aquí El cambió tú cautiverio\nE                 B               (E/G# ) A  \nReprende al devorador levanta tu cabeza ahora\n                  E/B           B          E \nVen declara tú victoria y bendición recibirás\n\nCoro:\n                   B    E \nSi estás caído Él te levanta (Él te levanta)\n                          F#m \nSi estás llorando Él te consuela\n                          A                    B7     E \nSi estás oprimido Él te liberta Él es Dios de ayer y ahora\n                A/C#     SI/RE#   E \nProclama yo soy más que vence...dor \n                        F#m \nÉl en su palabra lo prometió\n                                   A                     B7             E \nSalta las barreras y atraviesa el abismo sal de ese calabozo sé un ganador\n              A/C#   SI/RE#   E                             F#m \nEl león de la tribu de.. Judá entra en la batalla para ganar\n                             A           B7               E \nMira a tu enemigo ya lo derrotó tú eres libre y puedes volar\nB                            E     B7 \nvuela ahora en las alas del viento oh\n               E   D#   C#m     G# F#m         B7       E \nLa victoria es tuya es tuya es tuya la victoria es tuya"},{"id":1765436512097,"name":"Amor sin condicion","tone":"Mi","lyrics":"C#m                B              A\n   Aún antes de hablar, tu voz podía oír\nC#m            B          A\n   Has sido tan bueno para mí\nC#m               B                  A\n   Antes de respirar, soplaste tu aliento en mí\nC#m              B        A\n   Has sido tan bueno para mí\n\n[Coro]\n\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición\n    C#m              B              A              E\nMe persigue y deja las noventa y nueve y va por mí\n           C#m              B           A              E\nNo puedo ganarlo ni merecerlo, Tu amor se entregó por mí\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición\n\n[Segunda Parte]\n\nC#m            B                      A\n   Cuando enemigo fui, tu amor luchó por mí\nC#m            B          A\n   Has sido tan bueno para mí\nC#m               B                  A\n   Cuando indigno fui, pagaste el precio por mí\nC#m            B          A\n   Has sido tan bueno para mí\n\n[CORO]\n\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición\n    C#m              B              A              E\nMe persigue y deja las noventa y nueve y va por mí\n           C#m              B           A              E\nNo puedo ganarlo ni merecerlo, Tu amor se entregó por mí\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición\n\n( C#m B  A  E )\n\n[puente]\n\nC#m                       B                       A\n   No hay sombra que no alumbres, monte que no escales, para\n              E\nEncontrarme a mí\nC#m                        B                      A\n   No hay pared que no derrumbes, cadena que no rompas, para\n              E\nEncontrarme a mí\n\n[CORO Final]\n\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición\n    C#m              B              A              E\nMe persigue y deja las noventa y nueve y va por mí\n           C#m              B           A              E\nNo puedo ganarlo ni merecerlo, Tu amor se entregó por mí\n    C#m              B              A              E\nTu amor me envuelve, me sostiene, amor sin condición"},{"id":1765436715025,"name":"Yo quiero enamorarme mas de ti","tone":"Mi","lyrics":"E                   B7                 C#m\nCuando pienso en tu amor y en tu fidelidad\n                A         B7        E\nNo puedo hacer más que postrarme y adorar\n                             B7                          C#m\nCuando pienso en lo que has sido y hasta donde me has traído\n              B7\nMe asombro de ti\n\nCoro 1:\n\nC#m     B7         A\nNo me quiero conformar\nC#m   B7            A\nHe probado y quiero más\n\nCoro 2:\nE                           B7\nYo quiero enamorarme más de ti\n                        C#m\nEnséñame a amarte y a vivir\n                  B             A\nConforme a tu justicia y tu verdad\n                   B7     E\nCon mi vida quiero adorar\n                           B7\nTodo lo que tengo y lo que soy\n                           C#m\nTodo lo que he sido te lo doy\n             B        A\nQue mi vida sea para ti\n            B7          E\nComo un perfume a tus pies\n\n\n\nSE REPITE PATRON EN EL OTRO VERSO"},{"id":1765436985594,"name":"Tu amor por mi","tone":"Re","lyrics":"     D       F#m        Bm           F#m\nTu amor  por mi, es más dulce que la miel.\n       G        D/F#     Em    A7\nY tu misericordia es nueva cada día.\n\n       G         D/F#          C          G/B\nEs por eso que te alabo, es por eso que te sirvo.\n       D/A          E/G#         A7\nEs por eso que te doy todo mi amor.\n       G           D/F#        C           G/B\nEs por eso que te alabo, es por eso que te sirvo.\n       D/A         A7           G  D\nEs por eso que te doy todo mi amor."},{"id":1765437482575,"name":"Nose porque","tone":"Mim","lyrics":"\n   Em7       B/Eb  Em9/D       C#m7\nNo sé porque      Señor tu me tocaste\n   Am7   C/G    D/F#       B7/Eb\nNo sé porque en mi tu te fijaste\n Em7             F#         B7     Em\nPero si sé que grande es tu amor por mí\n\n\n   Em7     B/Eb    Em9/D    C#m7(b5)\nMi corazón      esta agradecido\n   Am7 C/G   D/F#        B7/Eb\nMi corazón esta aquí rendido\n   Em7            F#   B7    Em7 - E\nContigo siempre quiero Señor estar\n\n\nE11 E  Am7   C/G   D - D/F#\nPorque fue - ra de ti\n      G           C  \nNada deseo en la tierra\n      F#             B\nTu presencia es más hermosa\n\n           Em7 - D/F# - E/G#\nSUBIDA:   Que cualquier cosa\n           Cmaj7 - Bm7 - Em7\nBAJADA:   Que cualquier cosa\n"},{"id":1765437658352,"name":"Esta aqui","tone":"Mim","lyrics":"Verso 1\nB7       Em                Am  \nHoy día vi nuevamente esa cruz\n      D           D7       G         B7 \nEstá vacía porque vive mi Jesús, mi Jesús\n      Em        Am  \nEstá aquí, tú no lo ves\n      D           D7           G           B7 \nPero lo siento muy dentro de mi ser, de mi ser\n\nCORO\n\n        Em                     Am  \nYo te alabaré con todo el corazón\n          D      D7       G \nPorque Jesús me dio la salvación\n          B7      C  \nLa gloria es para Jesús\n   D7       C         G    B7 \nAleluya al Cordero de Dios\n        Em                     Am  \nEstá aquí lo siento en mi corazón\n          D      D7       G \nEstá aquí el Dios de la salvación\n      B7          C  \nEstá aquí dentro de mí\n      Em        B7          Em \nEstá aquí, está aquí, está aquí\n\n\nVerso 2\nB7       Em                Am  \nHoy yo clamé Jesús respondió\n      D           D7       G         B7 \nY mis pecados y tristezas se llevó, se llevó\n      Em        Am  \nY me llenó con su poder\n     D           D7           G           B7 \nY hoy lo siento muy dentro de mi ser, de mi ser\n\nCORO:\n\n        Em                     Am  \nYo te alabaré con todo el corazón\n          D      D7       G \nPorque Jesús me dio la salvación\n          B7      C  \nLa gloria es para Jesús\n   D7       C         G    B7 \nAleluya al Cordero de Dios\n        Em                     Am  \nEstá aquí lo siento en mi corazón\n          D      D7       G \nEstá aquí el Dios de la salvación\n      B7          C  \nEstá aquí dentro de mí\n      Em        B7          Em \nEstá aquí, está aquí, está aquí\n\n\nFINAL:\nC  B  Em \nEstá aquí"},{"id":1765437804846,"name":"Aunque la higuera","tone":"MIm","lyrics":"  Em                 Bm\naunque la higera no floresca\n          Am   B         Em\nni en las vides  halla fruto\n       E     D/F#     E/G#      Am\naunque falte el producto del olivo\n        C       B7        Em        B7 \ny los labrados no den mantenimiento  x2\n\n    Em  E           Am\ncon todo yo me alegrare\n      D      D7       G\ny me alegrare   en jehova\n     Am         Em\ny me gozare, y me gozare\n      C     B7      Em        \nen el dios de mi salvación\n"},{"id":1765480189166,"name":"Llename señor","tone":"Sol","lyrics":"[VERSO]\n\nG          G     Am            Bm\nComo el ciervo busca por las aguas\n       C        G       Am   D\nAsí clama mi alma por ti Señor\nG       G        Am           Bm\nDía y noche yo tengo sed de ti\n  C              D\nY sólo a ti buscaré\n\n[CORO]\n\n G   D    C        D\nLlename, llename Señor\n G    D   C          D\nDame más, más de tu amor\n   Am     Em  C       D\nYo tengo sed sólo de ti\n Am  D    G\nLlename Señor"},{"id":1765480739702,"name":"Sol de la mañana","tone":"Sol","lyrics":"G                      C   G\nSi no cuesta nada Solo dos palabras\n   F                     C  \nTe quiero y nada mas, Te quiero de verdad\nG       D7 \nJesús, Jesús\n\nG                 C    G\nPorque la mereces y te pertenece\n   F                     C  \nla gloria solo a ti, la gloria que hay en mi\nG       D7 \nSeñor, Señor\n\n      G                          C                   Cm  \nPorque tu sol de la mañana, das vida, donde no existe nada\n  D                                 G            D \ny vienes al hombre que es malo, y le amas, y le amas\n\n       G                          C                   Cm  \nSiendo tu el rey de la gloria, moriste por darme victoria\n   D                                   G \nhoy vives y llego en mi canto, tu historia\n\n\n          G     F#   Em  D      Am  \n//Llenas hoy mi corazon con tu presencia\n       D                         Em\nllenas de alegria y paz todo mi ser \n    C                           Em          \nde cualquier necesidad tu me responderas\n       Am              D\nporque me amas me aaaamas//\n\n\n"},{"id":1765481212866,"name":"Vive el señor para siempre","tone":"Sol","lyrics":"VERSO 1\n\nG              F#\nUnos piensan, otros dicen\n      Em \nQue Dios no existe\nC          D          G\nPero yo digo que es real\nC         D/C          Bm\nSi Él estuvo con muchos hombres\nEm           Am         D    G\nEn el ayer, hoy está aquí y vive\n\n[CORO]\n\nC         D         G     \nVive el Señor para siempre\nC      D          G   \nVive mi Dios par siempre\nC        D/C     Bm         Em\nVive en mi vida y en mi corazón\nAm           D            G\n¡Oh mi rey vive para siempre!\n\nVerso 2\nG         F#             Em\nMiro los cielos digo que vive\nC            D            G\nDaniel lo gritó dentro del pozo\nC            D/C\nHoy yo lo grito\nBm                    Em\nDesde el fondo de mi alma\nAm       D            G\nVive, vive para siempre\n"},{"id":1765481584989,"name":"Me dijo vive","tone":"Sol","lyrics":"Am              D              G\nAl despertar oscuro en mi interior\nEm           Am      D     G   \nSolo y sin Dios moría mi ser\n         C  D/C      G \nLa libertad me ofreció\n              Am\nYo te amo soy cristo\n       D        G\nMe habló, me habló.\n\nCoro:\nG           F#\nMe dijo vive\n                 Em \nCuando yo estaba muerto\nC   Am            D\nVive, cuando sin esperanza\n       D\nMe encontré\nG     F#              Em\nVive, porque yo soy la vida\nC    Am             D\nVive, y tomando mis manos\nD\nMe levantó\n             G\nMi hijo eres tú.\n\n-2-\n              Am\nCuando Él me halló\n   D             G  Em\nDesnudo me encontré\n        Am\nSólo su voz\n   D          G\nMe hizo renacer\n         C      D/C       G\nLuego su luz le dio a mí ser\n          Em   Am      D\nUn camino nuevo para andar\nD         C/E  D/F# \nPara andar.\n\nCoro:\nG           F#\nMe dijo vive\n                 Em \nCuando yo estaba muerto\nC    Am                 D\nVive, cuando sin esperanza\n       D\nMe encontré\nG     F#              Em\nVive, porque yo soy la vida\nC  Am              D\nVive, y tomando mis manos\nD\nMe levantó\n             G\nMi hijo eres tú.\n\n"},{"id":1765481835404,"name":"El poder de tu amor","tone":"Sol","lyrics":"\nG       D/F#   Em7           Bm7  Em7\nVengo a Ti Señor Cámbiame renuévame\n       Em7  D  C        D     Em7  D\nPor la gracia que encontré en Ti\nG     D/F#    Em7                Bm7   Em7\nAhora se que las debilidades que hay en mi\nEm7  D   C C/D                    C/G   G D/F# Em7 D\nDesvanecerán, por el poder de tu amor\n\n[Coro]\n\nC C/E D                C/G   G D/F# Em7 D\nCúbreme, con Tu amor rodéame\nC C/E D                G Am7 G/B \nTómame cerca quiero estar\n  C  C/E  D                 C/G     G\nY al esperar nuevas fuerzas yo tendré\n  D/F#  Em7    Em7       D     C\nY me levantare como las águilas\n       C/D          C/G  G\nPor el poder de tu amor   G D/F# Em7 D\n\n\n[Verso 2]\n\nG       D/F#  Em7           Bm7  Em7\nYo te quiero ver cara, cara oh Señor\n   Em7  D  C          D      Em7 D\nY conocer así más de Ti en mí\nG      D/F#  Em7               Bm7  Em7\nPrepárame Señor para hacer Tu voluntad\nEm7       D   C C/D                    C/G G D/F# Em7 D\nViviendo cada día por el poder de Tu amor"},{"id":1765482198972,"name":"Uno mas grande que el templo","tone":"Sol","lyrics":"[VERSO 1]\nG                      C     D      G    B7 \nUno más grande que el templo está aquí.\nEm                    B7            Em     Dm   G7  \nUno más grande que el templo está aquí.\nC             D/C    B7             Em \nRey de reyes, Señor de señores; mi Dios.\nAm                    A7           D -C -Bm -Am \nUno más grande que el templo está aquí.\n\n[Coro]\nG                   C      D          G     B7 \n¿Quién es el Rey de Gloria que está aquí?\nEm                  B7               Em    Dm  G7  \n¿Quién es el Rey de Gloria que está aquí?\nC                  D/C       B7               Em \nJehová el fuerte y valiente, el Poderoso en batalla.\nAm                A             D \nEl Admirable y Bendito Señor Jesús.//\n\n[VERSO 2]\nG                      C     D      G    B7 \nSimeón lo tuvo en sus brazos y se gozó.\nEm                    B7            Em     Dm   G7 \nIsaías cayó como muerto cuando le vió.\nC             D/C    B7             Em\n¡Toda la tierra está llena de su poder y su gloria!\nAm                    A7           D   C/E D/F#\nUno más grande que el templo está aquí.\n\n[Coro]\nG                   C      D          G     B7 \n¿Quién es el Rey de Gloria que está aquí?\nEm                  B7               Em    Dm  G7  \n¿Quién es el Rey de Gloria que está aquí?\nC                    D/C       B7               Em \nJehová el fuerte y valiente, el Poderoso en batalla.\nAm                A             D \nEl Admirable y Bendito Señor Jesús.//\n\n[VERSO 3]\nG                      C     D      G    B7 \n¿Cuántos adoran al templo y no al Dios del templo?\nEm                    B7            Em     Dm   G7\n¿Cuántos no saben que vive y está despierto?\nC             D/C    B7             Em\n¡Ábranse Puertas Eternas que entrará el Rey de Gloria!\nAm                    A7           D   C/E D/F#\nUno más grande que el templo está aquí"},{"id":1765482543359,"name":"Estar contigo","tone":"Sol","lyrics":"[VERSO 1]\n              G\nMe has quebrantado\nC           D\nUna y otra vez\n               G\nMe siento olvidado\n   C           D\nComo si no me ves\n            Em\nY cuando te hablo\n     C                           G  C\nLo único que puedo hacer es esperar\n\n[Verso 2]\n\n             G\nMe has sostenido\nC           D\nUna y otra vez\n              G\nCreer que conmigo\n C             D\nSigues siendo fiel\n            Em\nEs por tu palabra\n    C                      G  C\nQue no me rendiré yo confiaré\n\n[Coro ]\n\nC/E   D/F#   G\nEstar con - tigo\n       D                  Em\nNo hay otro lugar que me llene\n C                   G\nEn   la tempestad me das calma\n           D           C\nNada detendrá tu fidelidad\n\n\nSE PUEDE MEZCLAR CON:\nTu FIDELIDAD\n\n[Estribillo]\n\nG        Em       Am7  G6\nTu fidelidad es grande\nD/F#      D     C         G \nTu fidelidad incomparable es\nEm7        D6    Am7\nNadie como tu bendito Dios\n C/D    D       G\nGrande es tu fidelidad"},{"id":1765483221400,"name":"Santo por siempre","tone":"Sol","lyrics":"[Intro] C  Em  D  Bm\n        Em  D  G\n\n[Primera Parte]\n\n G\nMil generaciones\n    C          G\nSe postran adorarle\n       Em        D\nLe cantan al cordero\n         C\nQue venció\n\n[Segunda Parte]\n\n      G\nLos que nos precedieron\n   C               G\nY los que en Él creerán\n    Em           D\nLe cantarán a aquel\n            C\nQue ya venció\n\n[Puente]\n\n                       Em\nTu nombre, es más alto\n     D\nTu nombre, es más grande\n    Em            D    C\nTu nombre, sobre todo es\n\n                      Em\nSean tronos, dominios \n   D\nPoderes y reinos\n    Em            D   Am7\nTu nombre, sobre todo es\n\n[Estribillo 1]\n\n            C\nClaman ángeles\n Em  D\nSan_to\n               Bm7\nClama la creación\n    Em\nSanto\n           Am7\nExaltado Dios\n    D\nSanto\n            G\nSanto por siempre\n\n[Tercera Parte]\n\n\nSi te ha perdonado\n    C           G\nY tienes salvación\n Em            D\nCántale al cordero\n         C\nQue venció\n\n[Cuarta Parte]\n\n G\nSi te ha libertado\n    C                   G\nSu nombre ha puesto en ti\n Em            D\nCántale al cordero\n         C\nQue venció\n\n[Puente]\n\n Em          D        Am\nCantaremos siempre \"amén\"\n\n[Estribillo 1]\n\n            C\nClaman ángeles\n Em  D\nSan_to\n               Bm7\nClama la creación\n    Em\nSanto\n           Am7\nExaltado Dios\n    D\nSanto\n            G\nSanto por siempre\n\n[Estribillo 2]\n\n                    C\nCanta el pueblo al Rey\n Em  D\nSan_to\n            Bm7\nSoberano es Él\n    Em\nSanto\n              Am7\nY por siempre es\n    D\nSanto\n            G\nSanto por siempre\n\n[Puente]\n\n                       Em\nTu nombre, es más alto\n     D\nTu nombre, es más grande\n    Em            D    C\nTu nombre, sobre todo es\n\n                      Em\nSean tronos, dominios \n   D\nPoderes y reinos\n    Em            D   Am7\nTu nombre, sobre todo es\n\n[Estribillo 1]\n\n            C\nClaman ángeles\n Em  D\nSan_to\n               Bm7\nClama la creación\n    Em\nSanto\n           Am7\nExaltado Dios\n    D\nSanto\n            G\nSanto por siempre\n\n[Estribillo 2]\n\n                    C\nCanta el pueblo al Rey\n Em  D\nSan_to\n            Bm7\nSoberano es Él\n    Em\nSanto\n              Am7\nY por siempre es\n    D\nSanto\n            G\nSanto por siempre\n\n[Final]\n\n              Am7\nY por siempre es\n    D\nSanto\n            G     C  G\nSanto Por Siempre"},{"id":1765484182461,"name":"En la inmensidad","tone":"Sol","lyrics":"G                           \nOh que hermoso es pensar, en lo\n            Am             D\ngrande que eres y me puedo gozar\n                C          G\nal saber que en todo estas tu.\n\n\n        G\nEn las flores del campo, en las\n             Am\ngrandes montañas, en los ojos de\n    D       C   D   G\nun niño veo tu poder.\n\n[coro]\nG                 G7        Am\nEn la inmensidad, del espacio,\n     D\nlas estrellas con su brillo me\nC          D      G\ndicen que ahí estas, en el dulce\n             G7          Am\ntrinar, de un ave al volar, em\n   D\nlos montes, en los valles veo\nC       G\ntu poder.\n[musica]\nG   Bm     F   Am    D\nVariacion:\nEm   F#    F   Am   D\n\n\nG                           G7\nHoy me puedo gozar, al saber que\n       Am          D\ntu vives y puedo contemplar, lo\n                C          G\nque tu has creado para mi,\n\n        G                   G7\nEn el viento que sopla, en el sol\n               Am\ncon su brillo, en el cielo\n        D       C    D   G\nestrellado veo tu poder.\n\n[coro final]\nG                 G7        Am\nEn la inmensidad, del espacio,\n     D\nlas estrellas con su brillo me\nC          D      G\ndicen que ahí estas, en el dulce\n             G7          Am\ntrinar, de un ave al volar, em\n   D\nlos montes, en los valles veo\nC       G\ntu poder.\n[musica]\nG   Bm     F   Am    D\nVariacion:\nEm   F#    F   Am   D"},{"id":1765484325031,"name":"Algo esta cayendo aqui","tone":"Sol","lyrics":"G                       Am\n    Algo está cayendo aquí\nD                        G\n    Es tan fuerte sobre mí\nEm                   Am\n    Mis manos levantaré\nD                    G  D\n    Y su gloria tocaré\n\nG                       Am\n    Algo está cayendo aquí\nD                       G\n    Es tan fuerte sobre mí\n\nEm                   Am\n    Mis manos levantaré\nD                    G  D\n    Y su gloria tocaré\n\n        G     C  G\nEsta cayendo Oh Oh\n         Bm\nSu gloria sobre mí\n           Am\nSanando heridas\n                C\nLevantando al caído\n                  D\nSu gloria está aquí\n                  G\nSu gloria está aqu"},{"id":1765484431926,"name":"Mi plenitud","tone":"Sol","lyrics":" Em                C           G          D\nSi mis fuerzas se acaban, Descansare en ti\n Em                C           G          D\nSi respondes con silencio, esperare en ti\nC            D        G                  Em\nPríncipe de paz, tu palabra me dice, que no me dejaras\nAm           C               G               D\nMi confianza esta, puesta en ti, puesta en ti\nC        G         Em               D\nMi plenitud, si me falta todo en ti lo tengo todo\nC        G         Em               D\nTe tengo a ti, tu presencia es todo, eres mi tesoro\nAm  G   D   Am  G   D\nFuera de ti, nada deseo\nAm  G   D   Am  G   D\nEres mi anhelo, Jesús"},{"id":1765484688536,"name":"Tu mirada","tone":"Sol","lyrics":"G                            Em7\nTus  ojos  revelan  que  yo  nada  puedo  esconder\n              C7M                 C/D   D/F#\nQue  no  soy  nada  sin  Ti  oh  fiel  Señor\nG                                Em7\nTodo  lo  sabes  de  mí  cuando  miras  el  corazón\n      C7M         Am                   C/D  D\nTodo  lo  puedes  ver  muy  dentro  de  mí\nG/B         C7M           G/B     C7M\nLleva  mi  vida  a  una  sola  verdad\n      G/B        C7M   Am7                C/D  D\nQue  cuando  me  miras   nada  puedo  ocultar\n\nG            D/F#      Em7                  G/B          C\nSé  que  es  tu  fidelidad  que  lleva  mi  vida  mas  allá\n               Am          D  C/E  D/F#\nDe  lo  que  puedo  imaginar\nG        D/F#         Em7            G/B                C\nSé  que  no  puedo  negar  que  tu  mirada  puesta  en  mí\n     C/D    D/F#       G\nMe  llena  de  tu  paz\n\n( E  E/G# )\n\nA           E/G#       F#m7                   F#m7/E       D7M\nSé  que  es  tu  fidelidad  que  lleva  mi  vida  Mas  allá\n             Bm7           E    D/F#   E/G#\nDo  lo  que  puedo   imaginar\nA        E/G#         F#m7            F#m7/E           D7M\nSé  que  no  puedo  negar  que  tu  mirada  puesta  en  mi\n       D/E            A\nMe  llena  de  tu  paz\n\nE/G#               F#m7            Bm\n  Que  tu  mirada  puesta  en   mim\n       D/E            A\nMe  llena  de  tu  paz\n"},{"id":1765486641832,"name":"Paz en la tormenta","tone":"Sol","lyrics":"[Primeira Parte]\n         G             C           G\nCuando lloras por las veces que intentaste\n    G                    Am7        D\nY tratas de olvidar las lágrimas que lloraste\n       C               G/B\nSolo tienes pena y tristeza\n     Em                 C\nEl futuro incierto espera\n    G        C     D       G\nEn paz en medio de la tormenta\n\n[Segunda Parte]\n        G          G4                G\nMuchas veces yo me siento igual que tú\n      G         Am7     D\nY mi corazón, anhela algo real\n      C           B        Em  D     C\nEl señor viene a mí y me ayuda a seguir\n   G/D    C/D      D       G\nEn paz en medio de la tormenta\n\n[CORO]\n\n          G  G/B  C     C/D    G\nPuedes tener,    paz en la tormenta\n          G           Am7           D\nFe y esperanza cuando no puedas seguir\n            C             B\nAún con tu mundo hecho pedazos\n     Em      D      C\nEl señor guiará tus pasos\n   G/D    C/D            G\nEn paz en medio de la tormenta\n\n[[[y para subir a LA:]]]]\n\n         A   A/C#  D     D/E    A\nPuedes tener,      paz en la tormenta\n          A           Bm7           E\nFe y esperanza cuando no puedas seguir\n            D             C#\nAún con tu mundo hecho pedazos\n      F#m    E       D\nEl señor guiará tus pasos\n   A/E    D/E      E       A\nEn paz en medio de la tormenta\n\n[CORO]\n          A   A/C#  D     D/E    A\nPuedes tener,      paz en la tormenta\n          A           Bm7           E\nFe y esperanza cuando no puedas seguir\n            D             C#\nAún con tu mundo hecho pedazos\n      F#m    E      D\nEl señor guiará tus pasos\n    A/E   D/E      Db/F   F#m  B\nEn paz en medio de la tormenta"},{"id":1765487207108,"name":"Tu te mereces toda gloria","tone":"Sol","lyrics":"Intro;  G   D    C   G\n\n\n  G                    D\n Hoy he venido a tus plantas\n           C            G\nMas no a pedirte nada, Señor\nG                  D\nMi corazón está latiendo\n            C            G\nMuy fuertemente, y es por ti\nG                   D\nTodo mi ser se estremece\n           C            G\nAl comprender tu gran amor\n       Em       Am7\n¿De qué modo podre pagar\n    D               D\nSi cada vez te debo más?\n\nG                    D\nTú te mereces toda gloria\n              C\nTe mereces alabanza\n              G\nCada día, oh Señor\n        D\nSí, mi Señor\nG                    D\nYo con fervor he de alabarte\n                 C\nCon pasión he de servirte\n                      G\nMientras tenga vida en ti\n   D                    D\nSoy tan feliz, soy tan feliz\n(Se repite)\nC                  G\nRecibe mi canto, Señor\nAm             F             D D D D D D\nEsta ofrenda de amor y devoción\n----------------------------------------------------\n\nCAMBIO DE TONALIDAD A LA MAYOR\nA                     E \nTú te mereces toda gloria\n              D\nTe mereces alabanza\n               A\nCada día, oh Señor\n              E\nSí, mi Señor\nA                     E\nYo fervor he de alabarte\n                  D\nCon pasión he de servirte\n                      A\nMientras tenga vida en ti\nE                         A\nSoy tan feliz, soy tan feliz\n\nFINAL;  A   E  D   A\n"},{"id":1765487570830,"name":"Dios imparable","tone":"LA","lyrics":"A/C#    D     F#m       E\nEres alabado, eres exaltado\n   A/C#        D       F#m        E\nTu nombre levantamos, aleluya, aleluya\nA/C#    D    F#m         E\nEres adorado te glorificamos\n   A/C#        D        F#m        E\nTu nombre levantamos, aleluya, aleluya\n      D  E  F#m      D  E  F#m\nA una sola voz, nos unimos hoy\n      D  E  F#m          E\nTe cantamos Dios en adoración\n\n[Estribillo]\n\n         D                  E\nDios imparable, Dios de imposibles\n    A        E/G#      F#m\nInigualable, eres invencible\n           D             E\nNo tengo temor en mi corazón\n               F#m\nTú tienes el control\n            Bm    E              F#m\nNo me falta nada    si te tengo a ti\n            Bm    E             \nNo me falta nada    si te tengo a ti\n\nA/C#    D     F#m       E\nEres alabado, eres exaltado\n   A/C#        D       F#m        E\nTu nombre levantamos, aleluya, aleluya\n      D  E  F#m      D  E  F#m\nA una sola voz, nos unimos hoy\n      D  E  F#m          E\nTe cantamos Dios en adoración\n\n[Estribillo]\n\n         D                  E\nDios imparable, Dios de imposibles\n    A        E/G#      F#m\nInigualable, eres invencible\n           D             E\nNo tengo temor en mi corazón\n               F#m\nTú tienes el control\n            Bm    E              F#m\nNo me falta nada    si te tengo a ti\n            Bm    E             \nNo me falta nada    si te tengo a ti\n\n[Puente] F#m  E/G#  A  A/C#  Bm\n\n    F#m      E/G#   A   A/C#    Bm\nY yo sé quién va conmigo va por mi\n       F#m   E/G#  A   A/C#  Bm\nY quien a mis enemigos hace huir"},{"id":1765488343353,"name":"Aleluya(va subiendo)","tone":"Sol","lyrics":"    G  Em    Am     D       C/G   G\nAleluya Aleluya Aleluya Aleluuuya\n    G  Em    Am     D       C/G   G   E\ncristo vive cristo vive cristo vive \n\n\n    A  F#m   Bm      E       D/A   A\nAleluya Aleluya Aleluya Aleluuuya\n    A  F#m    Bm     E       D/A   A   F#\ncristo vive cristo vive cristo vive \n\n\n    B  G#m   C#m    F#    E/B   B\nAleluya Aleluya Aleluya Aleluuuya\n    B  G#m    C#m   F#      E/B   B    A\ncristo vive cristo vive cristo vive     \n\n\n    D  Bm   Em      A       G/D   D\nAleluya Aleluya Aleluya Aleluuuya\n    D  Bm   Em      A       G/D   D   B\ncristo vive cristo vive cristo vive    \n\n    E  C#m   F#m      B       A/E   E\nAleluya Aleluya Aleluya Aleluuuya\n    E  C#m   F#m      B       A/E   E   \ncristo vive cristo vive cristo vive "},{"id":1765488456731,"name":"Quiero levantar mis manos","tone":"La","lyrics":"  A                  C#m    \nQuiero levantar mis manos\n  F#                Bm \nQuiero levantar mi voz\n  F#                 Bm    \nY ofrecerte a ti mi vida\nE                 A  A7\n  En santidad y amor\n D                    Bm       \nPadre sólo a ti te ofrezco \n    C#m           F# \nMi vida y mi corazón\nBm                    E     \nY me postro en tu presencia \nBm        E  \nEn adoración\n\n[Estribillo]\n\nA          C#m  \n  Hijo de dios\nEm  A7     D  Dm/F \n   Recibe hoy\n          A  F#m     \nToda la glo_ria\n    Bm  A/C#  D  D#°    E  \nLa hon_ra     y      honor\n\nA          C#m  \n  Hijo de dios\nEm  A7     D  Dm/F \n   Recibe hoy\n          A  F#m     \nToda la glo_ria\n    Bm  A/C#  E    F   G  A\nLa hon_ra     y honor\n\n"},{"id":1765488561948,"name":"Sumergeme","tone":"La","lyrics":"    A\nCansado del camino\n    E\nSediento de ti\nF#m\nUn desierto he cruzado\n    D              E4     E\nSin fuerzas he quedado, Vengo a ti\n\n    A\nLuché como soldado\n     E\nY a veces sufrí\n              F#m\nY aunque la lucha he ganado\n        D                E4      E\nMi armadura he desgastado, vengo a ti\n\nA\nSumergeme\n                  C#m\nEn el río de tu espíritu\n     D\nNecesito refrescar\n      Bm7\nEste seco corazón\n    E\nSediento de ti\n\nD  E   A\nSumergeme\n                  C#m\nEn el río de tu espíritu\n     D\nNecesito refrescar\n      Bm7\nEste seco corazón\n    E\nSediento de ti\n       F#m D\nSumergeme\n       F#m D\nSumergeme\n        A\nSumergeme"},{"id":1765488666494,"name":"Himno de victoria","tone":"La","lyrics":"A                                      C#m\nÉl es el hombre que tuvo poder en andar sobre el mar,\n           D                            Bm\n¿Quién es el que puede hacer el mar callar?\n             F#m                       D\nY en el momento que la tempestad te quiera hundir,\n   Bm                   F#m             E\nÉl viene con toda autoridad y manda a calmar.\n\nA                                      C#m\nÉl es el hombre que tuvo poder de hacer a Israel\n       D               F#m          Bm\nCaminar por entre las aguas del mar Rojo.\n             F#m               A          F#m             D\nHizo un camino en medio del mar para el pueblo de Israel pasar,\nBm                        F#m           E\nY al otro lado con sus pies secos pudieron cantar el himno de \nA\nVictoria.\n\nCoro:\nA                     F#m                      Bm\nCuando estés frente al mar y lo tengas que atravesar,\n                          D         E      A\nLlama a este hombre con Fe, solo Él abre el mar.\n                      F#m                   Bm\nHermano no tengas temor si detrás viene Faraón,\n                    D           E         A            E\nAl otro lado tu pasarás y allí tú vas a entonar el himno de \nA\nVictoria.\n\nCada vez que el mar Rojo tu tengas que pasar,\nF#m\nLlama siempre a ese hombre que te va a ayudar,\n      Bm                           D\nEn la hora más difícil es cuando Él te ve,\n                      E                     A\nLlama siempre a ese hombre que tiene el poder.\n       A\nSi tu pasa por el fuego no te vas a quemar,\n      F#m                           Bm\nY si pasas por las aguas no te ahogarás,\n                                  D\nPasa como Israel que el mar atravesó\n                     E                  A           E      \n¡Y en el nombre del Señor, el himno de Victoria del otro \n        A     E/G#  F#m  E  Bm    E                A\nlado Cantó                         del otro lado Cantó    \n\n"}];
 
     let songs = [];
     let selectedSongId = null;
+    let currentToneFilter = "ALL"; // Por defecto muestra todos
+
+    // Mapeo inteligente de notas para que el buscador encuentre "Do" aunque toques "C"
+    const TONE_MAP = {
+        "C": ["c", "do"],
+        "D": ["d", "re"],
+        "E": ["e", "mi"],
+        "F": ["f", "fa"],
+        "G": ["g", "sol"],
+        "A": ["a", "la"],
+        "B": ["b", "si"]
+    };
 
     function loadSongs() {
       const raw = localStorage.getItem(STORAGE_KEY);
-      
       if (raw) {
         try {
           const parsed = JSON.parse(raw);
-          // Si estaba vacío, recargamos
           if (parsed.length === 0) {
             songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
             saveSongs();
@@ -143,7 +218,6 @@
             songs = parsed;
           }
         } catch (e) {
-          console.error("Error al leer localstorage", e);
           songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
         }
       } else {
@@ -157,46 +231,61 @@
     }
 
     window.resetToDefaults = function() {
-        if(confirm("Esto borrará cualquier canción nueva que hayas agregado en ESTE dispositivo y restaurará la lista original del Templo Jireh. ¿Estás seguro?")) {
+        if(confirm("Esto borrará las canciones guardadas en este dispositivo y volverá a las originales. ¿Estás seguro?")) {
             songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
             saveSongs();
-            renderSongList();
+            filterByTone('ALL', document.querySelector('.tone-btn')); // Reset filter visuals
             startNewSong();
             alert("Lista restaurada.");
         }
     };
 
+    // FUNCION NUEVA: Maneja el click en los botones de tono
+    function filterByTone(toneCode, btnElement) {
+        currentToneFilter = toneCode;
+        
+        // Actualizar visualmente los botones (quitar activo a todos, poner al clickeado)
+        document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
+        if(btnElement) btnElement.classList.add('active');
+        
+        renderSongList();
+    }
+
     function renderSongList() {
       const listEl = document.getElementById("songList");
-      const filterTone = document.getElementById("filterTone").value.trim().toLowerCase();
       const filterName = document.getElementById("filterName").value.trim().toLowerCase();
 
       listEl.innerHTML = "";
 
+      // Ordenar alfabetico
       const sorted = [...songs].sort((a, b) => {
-        const toneA = (a.tone || "").toLowerCase();
-        const toneB = (b.tone || "").toLowerCase();
-        if (toneA < toneB) return -1;
-        if (toneA > toneB) return 1;
         const nameA = (a.name || "").toLowerCase();
         const nameB = (b.name || "").toLowerCase();
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
-        return 0;
+        return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
       });
 
       const filtered = sorted.filter(song => {
         const tone = (song.tone || "").toLowerCase();
         const name = (song.name || "").toLowerCase();
         const lyrics = (song.lyrics || "").toLowerCase();
-        const matchesTone = !filterTone || tone.includes(filterTone);
-        const combinedText = `${name} ${lyrics} ${tone}`;
+        
+        // 1. Lógica del Filtro de Tono (Botones)
+        let matchesTone = true;
+        if (currentToneFilter !== "ALL") {
+            // Busca si el tono de la canción coincide con alguna variante (ej: C o Do)
+            const searchTerms = TONE_MAP[currentToneFilter];
+            matchesTone = searchTerms.some(term => tone.includes(term));
+        }
+
+        // 2. Lógica del Buscador de Texto
+        const combinedText = `${name} ${lyrics}`;
         const matchesSearch = !filterName || combinedText.includes(filterName);
+
         return matchesTone && matchesSearch;
       });
 
       if (filtered.length === 0) {
-        listEl.innerHTML = "<p class='small'>No hay coincidencias.</p>";
+        listEl.innerHTML = "<p class='small' style='padding:1rem; text-align:center'>No hay canciones con ese filtro.</p>";
         return;
       }
 
@@ -208,7 +297,7 @@
         button.textContent = song.name || "(Sin nombre)";
         button.onclick = () => showSongDetail(song.id);
         const tone = document.createElement("small");
-        tone.textContent = song.tone || "";
+        tone.textContent = song.tone || "Sin tono";
         item.appendChild(button);
         item.appendChild(tone);
         listEl.appendChild(item);
@@ -231,8 +320,10 @@
       titleEl.textContent = song.name;
       toneEl.textContent = song.tone ? `Tono: ${song.tone}` : "";
       lyricsEl.textContent = song.lyrics || "";
+      
+      // Rellenar formulario para editar
       document.getElementById("songName").value = song.name || "";
-      document.getElementById("songTone").value = song.tone || "";
+      document.getElementById("songTone").value = song.tone || ""; // Intenta matchear con el select
       document.getElementById("songLyrics").value = song.lyrics || "";
     }
 
@@ -301,7 +392,6 @@
       loadSongs();
       renderSongList();
       document.getElementById("songForm").addEventListener("submit", handleFormSubmit);
-      document.getElementById("filterTone").addEventListener("input", renderSongList);
       document.getElementById("filterName").addEventListener("input", renderSongList);
       document.getElementById("newSongBtn").addEventListener("click", startNewSong);
       document.getElementById("exportBtn").addEventListener("click", exportSongs);
