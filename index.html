@@ -16,25 +16,26 @@
     .panel h2 { margin-top: 0; font-size: 1.1rem; color: #111827; }
     .songs-panel { flex: 1; min-width: 0; }
     
-    /* ESTILOS NUEVOS PARA LOS BOTONES DE TONO */
+    /* BOTONES DE TONO ESTILO IPAD */
     .tone-filters {
       display: flex;
       gap: 0.5rem;
-      overflow-x: auto; /* Permite deslizar si no caben en pantalla */
+      overflow-x: auto;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
-      -webkit-overflow-scrolling: touch; /* Suavidad en iPad */
+      -webkit-overflow-scrolling: touch;
     }
     
     .tone-btn {
       flex: 0 0 auto;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 20px;
       background: #f3f4f6;
       border: 1px solid #d1d5db;
       cursor: pointer;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #374151;
       transition: all 0.2s;
     }
 
@@ -44,60 +45,62 @@
       background: #2563eb;
       color: white;
       border-color: #2563eb;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
     }
 
-    /* Buscador de texto */
+    /* Buscador */
     .search-box input {
       width: 100%;
       box-sizing: border-box;
-      padding: 0.6rem;
-      border-radius: 8px;
+      padding: 0.7rem;
+      border-radius: 10px;
       border: 1px solid #d1d5db;
-      font-size: 1rem; /* Texto más grande para iPad */
+      font-size: 1rem;
     }
 
     .song-list { margin-top: 0.5rem; max-height: 60vh; overflow-y: auto; border-top: 1px solid #e5e7eb; padding-top: 0.5rem; }
-    .song-item { padding: 0.6rem 0.3rem; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; }
-    .song-item button { border: none; background: none; padding: 0; margin: 0; text-align: left; font-size: 1rem; color: #1d4ed8; text-decoration: underline; cursor: pointer; }
-    .song-item small { font-size: 0.8rem; color: #6b7280; }
+    .song-item { padding: 0.7rem 0.4rem; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; }
+    .song-item button { border: none; background: none; padding: 0; margin: 0; text-align: left; font-size: 1.05rem; color: #1d4ed8; text-decoration: none; font-weight: 500; cursor: pointer; }
+    .song-item small { font-size: 0.85rem; color: #6b7280; margin-top: 0.2rem; }
+    .song-item:last-child { border-bottom: none; }
     
     .detail-panel { flex: 1.2; min-width: 0; }
     .detail-box { 
       border-radius: 10px; 
       background: #f9fafb; 
       border: 1px solid #e5e7eb; 
-      padding: 0.75rem; 
-      min-height: 140px; 
+      padding: 1rem; 
+      min-height: 200px; 
       white-space: pre; 
       font-family: Menlo, Monaco, Consolas, "Courier New", monospace; 
-      font-size: 0.95rem; /* Un poco más grande para leer mejor */
+      font-size: 1rem; 
       overflow-x: auto; 
     }
     
-    .detail-header { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.4rem; }
-    .detail-title { font-weight: 600; font-size: 1.1rem; color: #111827; }
-    .detail-tone { font-size: 0.9rem; color: #4b5563; }
+    .detail-header { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .detail-title { font-weight: 700; font-size: 1.3rem; color: #111827; }
+    .detail-tone { font-size: 1rem; color: #4b5563; font-weight: 500; }
     
-    .form-group { margin-bottom: 0.8rem; }
-    .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 500; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: #374151; }
     
     input[type="text"], textarea, select { 
-      width: 100%; box-sizing: border-box; padding: 0.6rem; 
+      width: 100%; box-sizing: border-box; padding: 0.7rem; 
       border-radius: 8px; border: 1px solid #d1d5db; font-size: 1rem; 
     }
-    textarea { resize: vertical; min-height: 150px; font-family: monospace; line-height: 1.4; }
+    textarea { resize: vertical; min-height: 180px; font-family: monospace; line-height: 1.4; }
     
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1rem; border-radius: 999px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 500; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.2rem; border-radius: 12px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; }
     .btn-primary { background: #2563eb; color: white; }
     .btn-secondary { background: #e5e7eb; color: #111827; margin-right: 0.5rem; margin-bottom: 0.5rem;}
     .danger-zone { margin-top: 2rem; border-top: 1px solid #fee2e2; padding-top: 1rem; }
-    .btn-danger { background: #fee2e2; color: #991b1b; font-size: 0.8rem; }
+    .btn-danger { background: #fee2e2; color: #991b1b; font-size: 0.85rem; padding: 0.5rem 1rem; }
   </style>
 </head>
 <body>
   <header>
     <h1>Alabanzas Templo Jireh</h1>
-    <p>Toca un tono para filtrar o busca por letra</p>
+    <p>Selecciona un tono o busca por letra</p>
   </header>
 
   <main>
@@ -107,13 +110,13 @@
         <label style="display:block; margin-bottom:0.5rem; font-weight:600; color:#374151;">Filtrar por Tono:</label>
         <div class="tone-filters" id="toneFilterContainer">
           <button class="tone-btn active" onclick="filterByTone('ALL', this)">Todos</button>
-          <button class="tone-btn" onclick="filterByTone('C', this)">Do (C)</button>
-          <button class="tone-btn" onclick="filterByTone('D', this)">Re (D)</button>
-          <button class="tone-btn" onclick="filterByTone('E', this)">Mi (E)</button>
-          <button class="tone-btn" onclick="filterByTone('F', this)">Fa (F)</button>
-          <button class="tone-btn" onclick="filterByTone('G', this)">Sol (G)</button>
-          <button class="tone-btn" onclick="filterByTone('A', this)">La (A)</button>
-          <button class="tone-btn" onclick="filterByTone('B', this)">Si (B)</button>
+          <button class="tone-btn" onclick="filterByTone('C', this)">Do</button>
+          <button class="tone-btn" onclick="filterByTone('D', this)">Re</button>
+          <button class="tone-btn" onclick="filterByTone('E', this)">Mi</button>
+          <button class="tone-btn" onclick="filterByTone('F', this)">Fa</button>
+          <button class="tone-btn" onclick="filterByTone('G', this)">Sol</button>
+          <button class="tone-btn" onclick="filterByTone('A', this)">La</button>
+          <button class="tone-btn" onclick="filterByTone('B', this)">Si</button>
         </div>
 
         <div class="search-box">
@@ -150,7 +153,7 @@
           </div>
           
           <div class="form-group">
-            <label for="songTone">Tono</label>
+            <label for="songTone">Tono (Principal)</label>
             <select id="songTone" required>
                 <option value="">-- Selecciona un tono --</option>
                 <option value="Do Mayor">Do Mayor (C)</option>
@@ -193,9 +196,9 @@
 
     let songs = [];
     let selectedSongId = null;
-    let currentToneFilter = "ALL"; // Por defecto muestra todos
+    let currentToneFilter = "ALL"; 
 
-    // Mapeo inteligente de notas para que el buscador encuentre "Do" aunque toques "C"
+    // Mapeo: SOLO PARA BUSCAR EN EL CAMPO "TONO", NO EN LA LETRA
     const TONE_MAP = {
         "C": ["c", "do"],
         "D": ["d", "re"],
@@ -231,23 +234,19 @@
     }
 
     window.resetToDefaults = function() {
-        if(confirm("Esto borrará las canciones guardadas en este dispositivo y volverá a las originales. ¿Estás seguro?")) {
+        if(confirm("Esto restaurará las canciones originales y borrará los cambios locales. ¿Seguro?")) {
             songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
             saveSongs();
-            filterByTone('ALL', document.querySelector('.tone-btn')); // Reset filter visuals
+            filterByTone('ALL', document.querySelector('.tone-btn'));
             startNewSong();
             alert("Lista restaurada.");
         }
     };
 
-    // FUNCION NUEVA: Maneja el click en los botones de tono
     function filterByTone(toneCode, btnElement) {
         currentToneFilter = toneCode;
-        
-        // Actualizar visualmente los botones (quitar activo a todos, poner al clickeado)
         document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
         if(btnElement) btnElement.classList.add('active');
-        
         renderSongList();
     }
 
@@ -257,7 +256,6 @@
 
       listEl.innerHTML = "";
 
-      // Ordenar alfabetico
       const sorted = [...songs].sort((a, b) => {
         const nameA = (a.name || "").toLowerCase();
         const nameB = (b.name || "").toLowerCase();
@@ -265,19 +263,26 @@
       });
 
       const filtered = sorted.filter(song => {
-        const tone = (song.tone || "").toLowerCase();
+        // Obtenemos solo los datos relevantes y los limpiamos
+        const toneTitle = (song.tone || "").trim().toLowerCase();
         const name = (song.name || "").toLowerCase();
         const lyrics = (song.lyrics || "").toLowerCase();
         
-        // 1. Lógica del Filtro de Tono (Botones)
+        // 1. FILTRO DE TONO (ESTRICTO: Solo mira el TITULO del tono)
         let matchesTone = true;
         if (currentToneFilter !== "ALL") {
-            // Busca si el tono de la canción coincide con alguna variante (ej: C o Do)
             const searchTerms = TONE_MAP[currentToneFilter];
-            matchesTone = searchTerms.some(term => tone.includes(term));
+            
+            // Verificamos si el TITULO DEL TONO (toneTitle) contiene "sol", "do", "re"...
+            // OJO: NO miramos song.lyrics aquí.
+            matchesTone = searchTerms.some(term => {
+                // Buscamos coincidencia exacta de palabra o inicio
+                // Ejemplo: "Sol" coincide con "Sol Mayor", "G" coincide con "G"
+                return toneTitle.includes(term);
+            });
         }
 
-        // 2. Lógica del Buscador de Texto
+        // 2. BUSCADOR DE TEXTO (Nombre o letra)
         const combinedText = `${name} ${lyrics}`;
         const matchesSearch = !filterName || combinedText.includes(filterName);
 
@@ -321,9 +326,8 @@
       toneEl.textContent = song.tone ? `Tono: ${song.tone}` : "";
       lyricsEl.textContent = song.lyrics || "";
       
-      // Rellenar formulario para editar
       document.getElementById("songName").value = song.name || "";
-      document.getElementById("songTone").value = song.tone || ""; // Intenta matchear con el select
+      document.getElementById("songTone").value = song.tone || "";
       document.getElementById("songLyrics").value = song.lyrics || "";
     }
 
@@ -402,4 +406,3 @@
   </script>
 </body>
 </html>
-
