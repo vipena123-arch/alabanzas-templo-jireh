@@ -5,218 +5,39 @@
   <title>Alabanzas Templo Jireh</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f3f4f6;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 1rem 1.2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-    }
-
-    header p {
-      margin: 0.25rem 0 0;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    main {
-      padding: 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .layout {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    @media (min-width: 800px) {
-      .layout {
-        flex-direction: row;
-        align-items: flex-start;
-      }
-    }
-
-    .panel {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      padding: 1rem;
-    }
-
-    .panel h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
-      color: #111827;
-    }
-
-    /* Panel de lista */
-    .songs-panel {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .songs-filters {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.5rem;
-    }
-
-    .songs-filters input {
-      flex: 1;
-      min-width: 130px;
-    }
-
-    label {
-      font-size: 0.85rem;
-      color: #4b5563;
-    }
-
-    input[type="text"], textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0.45rem 0.6rem;
-      border-radius: 8px;
-      border: 1px solid #d1d5db;
-      font-size: 0.9rem;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-      font-family: monospace;
-      line-height: 1.4;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px #2563eb33;
-    }
-
-    .song-list {
-      margin-top: 0.5rem;
-      max-height: 60vh;
-      overflow-y: auto;
-      border-top: 1px solid #e5e7eb;
-      padding-top: 0.5rem;
-    }
-
-    .song-item {
-      padding: 0.4rem 0.3rem;
-      border-bottom: 1px solid #f3f4f6;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .song-item button {
-      border: none;
-      background: none;
-      padding: 0;
-      margin: 0;
-      text-align: left;
-      font-size: 0.95rem;
-      color: #1d4ed8;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .song-item small {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-    .song-item:last-child {
-      border-bottom: none;
-    }
-
-    /* Panel detalle / formulario */
-    .detail-panel {
-      flex: 1.2;
-      min-width: 0;
-    }
-
-    .detail-box {
-      border-radius: 10px;
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      padding: 0.75rem;
-      min-height: 140px;
-      overflow-x: auto;
-      font-family: "Courier New", monospace; /* monoespaciada para acordes */
-      white-space: pre;                      /* respeta espacios y saltos tal cual */
-      font-size: 0.9rem;
-    }
-
-    .detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .detail-title {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #111827;
-    }
-
-    .detail-tone {
-      font-size: 0.8rem;
-      color: #4b5563;
-    }
-
-    .form-group {
-      margin-bottom: 0.6rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #111827;
-      margin-right: 0.5rem;
-    }
-
-    .btn-primary:active,
-    .btn-secondary:active {
-      transform: translateY(1px);
-    }
-
-    .small {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #f3f4f6; }
+    header { background: #111827; color: white; padding: 1rem 1.2rem; text-align: center; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    header p { margin: 0.25rem 0 0; font-size: 0.9rem; opacity: 0.8; }
+    main { padding: 1rem; max-width: 1000px; margin: 0 auto; }
+    .layout { display: flex; flex-direction: column; gap: 1rem; }
+    @media (min-width: 800px) { .layout { flex-direction: row; align-items: flex-start; } }
+    .panel { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1rem; }
+    .panel h2 { margin-top: 0; font-size: 1.1rem; color: #111827; }
+    .songs-panel { flex: 1; min-width: 0; }
+    .songs-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .songs-filters input { flex: 1; min-width: 130px; }
+    label { font-size: 0.85rem; color: #4b5563; }
+    input[type="text"], textarea { width: 100%; box-sizing: border-box; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid #d1d5db; font-size: 0.9rem; }
+    textarea { resize: vertical; min-height: 120px; font-family: monospace; line-height: 1.4; }
+    input[type="text"]:focus, textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb33; }
+    .song-list { margin-top: 0.5rem; max-height: 60vh; overflow-y: auto; border-top: 1px solid #e5e7eb; padding-top: 0.5rem; }
+    .song-item { padding: 0.4rem 0.3rem; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; }
+    .song-item button { border: none; background: none; padding: 0; margin: 0; text-align: left; font-size: 0.95rem; color: #1d4ed8; text-decoration: underline; cursor: pointer; }
+    .song-item small { font-size: 0.75rem; color: #6b7280; }
+    .song-item:last-child { border-bottom: none; }
+    .detail-panel { flex: 1.2; min-width: 0; }
+    .detail-box { border-radius: 10px; background: #f9fafb; border: 1px solid #e5e7eb; padding: 0.75rem; min-height: 140px; white-space: pre-wrap; font-family: monospace; font-size: 0.9rem; overflow-x: auto; }
+    .detail-header { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.4rem; }
+    .detail-title { font-weight: 600; font-size: 1rem; color: #111827; }
+    .detail-tone { font-size: 0.8rem; color: #4b5563; }
+    .form-group { margin-bottom: 0.6rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.45rem 0.9rem; border-radius: 999px; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-secondary { background: #e5e7eb; color: #111827; margin-right: 0.5rem; }
+    .danger-zone { margin-top: 2rem; border-top: 1px solid #fee2e2; padding-top: 1rem; }
+    .btn-danger { background: #fee2e2; color: #991b1b; font-size: 0.8rem; }
+    .small { font-size: 0.75rem; color: #6b7280; }
   </style>
 </head>
 <body>
@@ -227,69 +48,268 @@
 
   <main>
     <div class="layout">
-      <!-- Panel izquierdo: lista y filtros -->
       <section class="panel songs-panel">
         <h2>Listado de alabanzas</h2>
-
         <div class="songs-filters">
           <div style="flex:1">
             <label for="filterTone">Filtrar por tono</label>
-            <input id="filterTone" type="text" placeholder="Ej: Do, Re, Sol, Re mayor..." />
+            <input id="filterTone" type="text" placeholder="Ej: Re mayor, Sol mayor" />
           </div>
           <div style="flex:1">
-            <label for="filterName">Buscar por nombre o palabra de la letra</label>
-            <input id="filterName" type="text" placeholder="Ej: 'menguar', 'pastor', 'gloria'..." />
+            <label for="filterName">Buscar</label>
+            <input id="filterName" type="text" placeholder="Nombre o letra..." />
           </div>
         </div>
         <p class="small">Toca el nombre de una alabanza para ver la letra abajo.</p>
-
         <div id="songList" class="song-list"></div>
       </section>
 
-      <!-- Panel derecho: detalle y formulario -->
       <section class="panel detail-panel">
         <h2>Detalle de la alabanza</h2>
         <div class="detail-header">
           <div>
-            <div id="detailTitle" class="detail-title">Sin alabanza seleccionada</div>
+            <div id="detailTitle" class="detail-title">Selecciona una alabanza</div>
             <div id="detailTone" class="detail-tone"></div>
           </div>
         </div>
-
-        <!-- Usamos PRE para que respete espacios y acordes -->
-        <pre id="detailLyrics" class="detail-box">
-Aquí aparecerá la letra con acordes de la alabanza seleccionada.
-        </pre>
+        <div id="detailLyrics" class="detail-box">Aquí aparecerá la letra con acordes.</div>
 
         <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e5e7eb;" />
 
-        <h2>Agregar / editar alabanza</h2>
-
+        <h2>Gestión</h2>
         <div style="margin-bottom: 0.5rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
-          <button type="button" class="btn btn-secondary" id="newSongBtn">
-            Nueva alabanza
-          </button>
-          <button type="button" class="btn btn-secondary" id="exportBtn">
-            Exportar alabanzas
-          </button>
-          <button type="button" class="btn btn-secondary" id="importBtn">
-            Importar alabanzas
-          </button>
+          <button type="button" class="btn btn-secondary" id="newSongBtn">Nueva</button>
+          <button type="button" class="btn btn-secondary" id="exportBtn">Exportar</button>
+          <button type="button" class="btn btn-secondary" id="importBtn">Importar</button>
         </div>
 
         <form id="songForm">
           <div class="form-group">
-            <label for="songName">Nombre de la alabanza</label>
-            <input id="songName" type="text" required placeholder="Ej: Yo quiero más de Ti" />
+            <label for="songName">Nombre</label>
+            <input id="songName" type="text" required placeholder="Ej: Yo quiero más de ti" />
           </div>
           <div class="form-group">
-            <label for="songTone">Tono (ej: Do, Re, Sol...)</label>
-            <input id="songTone" type="text" required placeholder="Ej: Do, Re, Sol..." />
+            <label for="songTone">Tono</label>
+            <input id="songTone" type="text" required placeholder="Ej: Re mayor" />
           </div>
           <div class="form-group">
-            <label for="songLyrics">Letra con acordes (texto)</label>
-            <textarea id="songLyrics" required placeholder="Pega aquí la letra con acordes"></textarea>
+            <label for="songLyrics">Letra con acordes</label>
+            <textarea id="songLyrics" required placeholder="Ej: [Intro] D G A ..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar alabanza</button>
-          <p class="small">
-            Las alabanzas base vienen dentro
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+
+        <div class="danger-zone">
+            <p class="small">¿No aparecen las canciones o quieres reiniciar la lista?</p>
+            <button class="btn btn-danger" onclick="resetToDefaults()">Restaurar canciones originales</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "cancioneroAlabanzas";
+
+    // AQUI ESTAN TUS CANCIONES CARGADAS LISTAS PARA USAR
+    const CANCIONES_PREDEFINIDAS = [
+      {"id":1765392581354,"name":"Inexplicable","tone":"DO","lyrics":"C                 F    Dm              G\n Que tiene  tu espíritu que cuando me tocas\n            C      Am\nme haces   temblar\n                F    Dm              G\ny que es tu presencia que al manifestarse\n              C  Am\ntengo que llorar\n           C/E            F  Dm                    G\nes que soy      tan   pequeño  que al tu tocarme siento\n           C     Am\nque voy a desmayar\n          C/E      F    Dm                    G\nes que se tu    presencia  no hay aquí en la tierra\n              C  Am\ncon que comparar.\n\nCORO:\n         C/E      F  Dm           G\nno te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F                     G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento\n        C/E   F                     G\n//y cuando me tocas con tu santo espíritu\n               C\nlloro canto y tiemblo//.\n\n\nVERSO II:\n                  F  Dm                   G\nque hay en tu interior, que sientes por mi\n        C        Am\ndime como me amas\n               F     Dm                G\nque misterio existe, que mi duras pruebas\n         C         Am\nconviertes en calma\n            C/E    F    Dm                 G\nyo se que a tu  presencia toda la tierra tiembla\n                     C   Am\ny también tiembla mi alma\n    C/E     F    Dm                G\ny cuando me tocas con tu Santo Espíritu\n            C     Am\nme das la bonanza\n\n CORO:\n           C/E      F  Dm             G\n//no te pue___do mirar ni te puedo tocar\n                   C    Am\nno ha llegado el momento\n                        F  Dm                  G\ny ay veces que en  mi afán creo que ya tu no estas\n                   C   Am\npero vuelvo y te siento//\n\n        C/E   F    Dm                 G\n//y cuando me tocas con tu santo espíritu\n               C    am     C \nlloro canto y tiemblo//."},
+      {"id":1765395773900,"name":"Quebranta mi corazon","tone":"Do","lyrics":"  C                F/C   G / C\n/ Yo, quiero más de Ti\n                   C      G / B \nY habitar en Tu presencia\n   Am     G#aug          C/ G \nMenguar para que crezcas Tu,\nF        C/ E     Dm7 \n  y cada día     se-ré\n          G \nmas como Tu. /\n\n---coro---\n               Fmaj7  G/F \n/ Quebranta mi co - razón.\n             Em7  Am \nQuebranta mi vi - da\n              Dm7   G    C\nTe entrego mi voluntad a Ti.\n  C/E                Fmaj7  G/F \n   Todo  lo   que soy Señor\n            Em7      Am \ntodo cuanto tengo es tuyo\n             Dm7 \nYo quiero menguar\n  G               C\npara que crezcas Tu. /"},
+      {"id":1765396655331,"name":"Levanto mis Manos","tone":"RE","lyrics":"D           G      A\nLevanto mis manos\n                D      A/C#  Bm\nAunque no tenga fuerzas\n            Em7   G/A\nLevanto mis manos\n                    D      D7\nAunque tenga mil problemas.\n            -CORO-\n                    G\nCuando levanto mis manos\n                A/G\nComienzo a sentir\n       F#m7                Bm7\nUna uncion que me hace cantar\n                   Em7\nCuando levanto mis manos\n                G/A   D    D7\nComienzo a sentir el fuego.\n                   G\nCuando levanto mis manos\n                A/G\nMis cargas se van\n        F#m7   F#7/Bb  Bm7\nNuevas fuerzas Tu me das\n     B7/Eb       Em7\nTodo eso es posible\n                 G/A\nTodo eso es posible\n                   D\nCuando levanto mis manos."},
+      {"id":1765404895556,"name":"has pensado un momento","tone":"Do","lyrics":"C  \nHas pensado un momento\n\nQue Dios tan grande tenemos\n\nQue no existen barreras\n       D7       G \nQue lo puedan detener\n               Dm  G          C\nNo tiene principio, no tiene fin\n               F \nAcaso alguien puede\n              C      Am\nDetenerle un momento\n          D7                G \nCuando te dice, yo te bendeciré.\n\n\nCoro:\nC        F         C  \nPorqué estás tan triste\n         F        G \nPorqué estás llorando\n F           G/F \n//Porqué teniendo\n  Em          Am \nUn Dios tan grande\nDm                      G \nPorqué aun sangra la herida\n        C  \nEn tu corazón//"},
+      {"id":1765405006208,"name":"El esplendor de un rey","tone":"Do","lyrics":"C                    G/B  Am\nEl esplendor de un Rey, vestido en Majestad\n                   F\nLa Tierra alegre está\n                   G\nLa Tierra alegre está\n\nC                    G/B  Am\nCubierto está de luz, venció a la oscuridad\n                F\nY tiembla a Su voz\n              G\nTiembla a Su voz\n\n        C\nCuán Grande es Dios\n G/B            Am\nCántale, Cuán grande es Dios\nF\nY todos lo verán\n      G         C\nCuán grande es Dios\n\n(misma secuencia que en la estrofa I)\n\nDía a Día El está\nY el tiempo está en El\nPrincipio y el fin\nPrincipio y el fin\n\nLa Trinidad en Dios\nEl Padre, Hijo, Espíritu\nCordero y el León\nCordero y el León\n\nCORO 2:\n              C\nY Tu Nombre sobre todo es\n   G/B    Am\nTu eres Digno de alabar\n     F\nY mi ser dirá\n       G        C\nCuan grande es Dios"},
+      {"id":1765405057560,"name":"No basta","tone":"Re","lyrics":"INTRO: Gmaj7\n\nG    A          F#m     Bm  G           A         F#m   Bm\n  No basta solo con cantar,   no basta solo con decir\nG               A  F#m         Bm         Em       A         D\n  No es suficiente solo con querer hacer,    es necesario morir.\n\n\nG     A          F#m   Bm  G            A          F#m   Bm\n  No basta solo con soñar,    no basta solo con  pedir\nG            A     F#m         Bm        A Em       A       \n  No es suficiente solo con querer tener,    es necesario\nD \nmorir.\n\n\nG         A    F#m              Bm\n  Dame tu vida,   esa clase de vida que sabes dar\nG         A    F#m           Bm\n  Dame tu vida,  yo quiero vivir solo para ti\nG          A    F#m    Bm\n  Dame tu vida, resucítame en ti\nEm         A                  D\nYo quiero vivir solo    para ti.\n\n\nFinal\n\n   Em       A             Bm  A  G\nYo quiero vivir solo para ti,\nG           A             D\nYo quiero vivir solo para ti."},
+      {"id":1765405435070,"name":"Honra y gloria","tone":"Re","lyrics":"              D          F#m           Bm\nHay que comprender que la gloria es para Dios,\n            Am   F#   G    A               D\nQue no hay otro como Él, ¡Él es Dios! ¡Él es el Rey!\n                 D      F#m        Bm\nQue si no es por Él, no estaría yo aquí,\n       Am   F#  G          A          D\nNo sabría yo vivir, ni cantar podRía yo.\n                G  Em           D   Bm\nLa gloria es de Él, ¡sólo para Él!3\nEm                                 A    \nY si hoy canto es porque quiero decir:\n\nCORO:\n Bm  C#       D                             F#\nQue toda la gloria, gloria, gloria es para Dios.\n                 Am      Bm     Em\nNo hay otro como Él, un Dios creador.\n           G                     A \nHizo las aguas, el cielo y la tierra,\n             Em  D/F# G       A \nFormó los montes y también a mí.\n                D                      F#\n¡Oh glo…ria, gloria! yo ensalzo tu Nombre;\n              Am       Bm        Em\nBendito seas Tú por tu amor sin fin.\n     G                         D   Bm\nYo alabo y engrandezco tu Nombre.\n              Em           A \nY la gloria a Ti, ¡solo a Ti!\n\n\nVERSO 2 SE REPITE COMO EL PRIMERO\n\n\nPUENTE:\n                Bm                F#\nPorque Tú eres digno de honra y gloria\n             G       Em            C        A7\nY todo mi canto y alabanza es para ti (para ti)"},
+      {"id":1765406507284,"name":"Yo me rindo a el","tone":"Re","lyrics":"D9             A7      A\nTodo a Cristo, yo me entrego\n\nBm     G      A      D            D9\ncon el fin de serle fiel,         para siempre\n\nA7               Bm    G    A      D     \nquiero amarle y agra--darle solo a El.\n\n\nD9           Em7    A7             D   \nYo me rindo a El,   yo me rindo a El,\n\nD               G     Em     A9           D\ntodo a Cristo, yo me entrego quiero serle fiel.\n"},
+      {"id":1765406721592,"name":"El señor es mi pastor","tone":"Re","lyrics":"D               Em\nel Señor es mi pastor\nG  A      D\nnada me faltará\n\nD               Em\nel señor es mi pastor\nG\nen pastos delicados\n Em                A        \nél me hará descansar\n  Bm\njunto a aguas de reposo\nG\nme pastoreará\nA          D\nconfortará mi alma\n Bm                      G\nme guiará por sendas de justicia\n       G    D/A    A   \npor amor de su nombre"},
+      {"id":1765407008975,"name":"Queremos darte gloria","tone":"Re","lyrics":"D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\nG              A \nexaltándote Señor\n\n               D \nQueremos darte gloria\n      Bm  \nY alabanza\nG                     Em \nLevantamos nuestras manos\n\n\n   A          A7 \nexaltándote Señor\n\n            D \nGrande eres tú\n        A/C#           Bm  \nGrandes tus milagros son\n                 G  Em \nNo hay otro como tú\nA                A7 \nNo hay otro como tu\n\n            D \nGrande eres tú,\n     A/C#           Bm  \nMaravillas haces tú,\n                 G  Em \nNo hay otro como tú\n\nA      A7         D \nNo hay otro como tu"}
+    ];
+
+    let songs = [];
+    let selectedSongId = null;
+
+    function loadSongs() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      
+      if (raw) {
+        // Si el usuario ya tiene datos en su navegador, probamos usarlos
+        try {
+          const parsed = JSON.parse(raw);
+          // Si el array está vacío (quizás borró todo), recargamos las predefinidas
+          if (parsed.length === 0) {
+            songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
+            saveSongs();
+          } else {
+            songs = parsed;
+          }
+        } catch (e) {
+          console.error("Error al leer localstorage", e);
+          songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
+        }
+      } else {
+        // Primera vez que entra: cargamos las predefinidas
+        songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
+        saveSongs();
+      }
+    }
+
+    function saveSongs() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(songs));
+    }
+
+    // Función para forzar la restauración de las originales
+    window.resetToDefaults = function() {
+        if(confirm("Esto borrará cualquier canción nueva que hayas agregado en ESTE dispositivo y restaurará la lista original del Templo Jireh. ¿Estás seguro?")) {
+            songs = JSON.parse(JSON.stringify(CANCIONES_PREDEFINIDAS));
+            saveSongs();
+            renderSongList();
+            startNewSong();
+            alert("Lista restaurada.");
+        }
+    };
+
+    function renderSongList() {
+      const listEl = document.getElementById("songList");
+      const filterTone = document.getElementById("filterTone").value.trim().toLowerCase();
+      const filterName = document.getElementById("filterName").value.trim().toLowerCase();
+
+      listEl.innerHTML = "";
+
+      const sorted = [...songs].sort((a, b) => {
+        const toneA = (a.tone || "").toLowerCase();
+        const toneB = (b.tone || "").toLowerCase();
+        if (toneA < toneB) return -1;
+        if (toneA > toneB) return 1;
+        const nameA = (a.name || "").toLowerCase();
+        const nameB = (b.name || "").toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+
+      const filtered = sorted.filter(song => {
+        const tone = (song.tone || "").toLowerCase();
+        const name = (song.name || "").toLowerCase();
+        const lyrics = (song.lyrics || "").toLowerCase();
+        const matchesTone = !filterTone || tone.includes(filterTone);
+        const combinedText = `${name} ${lyrics} ${tone}`;
+        const matchesSearch = !filterName || combinedText.includes(filterName);
+        return matchesTone && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = "<p class='small'>No hay coincidencias.</p>";
+        return;
+      }
+
+      filtered.forEach(song => {
+        const item = document.createElement("div");
+        item.className = "song-item";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = song.name || "(Sin nombre)";
+        button.onclick = () => showSongDetail(song.id);
+        const tone = document.createElement("small");
+        tone.textContent = song.tone || "";
+        item.appendChild(button);
+        item.appendChild(tone);
+        listEl.appendChild(item);
+      });
+    }
+
+    function showSongDetail(id) {
+      const song = songs.find(s => s.id === id);
+      selectedSongId = id;
+      const titleEl = document.getElementById("detailTitle");
+      const toneEl = document.getElementById("detailTone");
+      const lyricsEl = document.getElementById("detailLyrics");
+
+      if (!song) {
+        titleEl.textContent = "No seleccionada";
+        toneEl.textContent = "";
+        lyricsEl.textContent = "";
+        return;
+      }
+      titleEl.textContent = song.name;
+      toneEl.textContent = song.tone ? `Tono: ${song.tone}` : "";
+      lyricsEl.textContent = song.lyrics || "";
+      document.getElementById("songName").value = song.name || "";
+      document.getElementById("songTone").value = song.tone || "";
+      document.getElementById("songLyrics").value = song.lyrics || "";
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById("songName").value.trim();
+      const tone = document.getElementById("songTone").value.trim();
+      const lyrics = document.getElementById("songLyrics").value;
+
+      if (!name || !tone || !lyrics) {
+        alert("Completa todos los campos.");
+        return;
+      }
+
+      if (selectedSongId !== null) {
+        const idx = songs.findIndex(s => s.id === selectedSongId);
+        if (idx !== -1) {
+          songs[idx].name = name;
+          songs[idx].tone = tone;
+          songs[idx].lyrics = lyrics;
+        }
+      } else {
+        const newSong = { id: Date.now(), name, tone, lyrics };
+        songs.push(newSong);
+        selectedSongId = newSong.id;
+      }
+      saveSongs();
+      renderSongList();
+      showSongDetail(selectedSongId);
+      alert("Guardado ✅");
+    }
+
+    function startNewSong() {
+      selectedSongId = null;
+      document.getElementById("songForm").reset();
+      document.getElementById("detailTitle").textContent = "Nueva alabanza";
+      document.getElementById("detailLyrics").textContent = "";
+    }
+
+    function exportSongs() {
+      if (!songs.length) return alert("Nada que exportar.");
+      const data = JSON.stringify(songs);
+      navigator.clipboard?.writeText(data).then(
+        () => alert("Copiado al portapapeles."),
+        () => prompt("Copia esto:", data)
+      );
+    }
+
+    function importSongs() {
+      const input = prompt("Pega el código JSON exportado:");
+      if (!input) return;
+      try {
+        const parsed = JSON.parse(input);
+        if (!Array.isArray(parsed)) throw new Error("Formato inválido");
+        songs = parsed;
+        saveSongs();
+        renderSongList();
+        selectedSongId = null;
+        alert("Importado correctamente ✅");
+      } catch (e) {
+        alert("Error al importar. Verifica el texto.");
+      }
+    }
+
+    function setup() {
+      loadSongs();
+      renderSongList();
+      document.getElementById("songForm").addEventListener("submit", handleFormSubmit);
+      document.getElementById("filterTone").addEventListener("input", renderSongList);
+      document.getElementById("filterName").addEventListener("input", renderSongList);
+      document.getElementById("newSongBtn").addEventListener("click", startNewSong);
+      document.getElementById("exportBtn").addEventListener("click", exportSongs);
+      document.getElementById("importBtn").addEventListener("click", importSongs);
+    }
+
+    document.addEventListener("DOMContentLoaded", setup);
+  </script>
+</body>
+</html>
