@@ -198,15 +198,15 @@
     let selectedSongId = null;
     let currentToneFilter = "ALL"; 
 
-    // Mapeo: SOLO PARA BUSCAR EN EL CAMPO "TONO", NO EN LA LETRA
-    const TONE_MAP = {
-        "C": ["c", "do"],
-        "D": ["d", "re"],
-        "E": ["e", "mi"],
-        "F": ["f", "fa"],
-        "G": ["g", "sol"],
-        "A": ["a", "la"],
-        "B": ["b", "si"]
+    // MAPEO CORREGIDO: USAMOS EXPRESIONES REGULARES PARA EVITAR QUE "D" ENCUENTRE "DO"
+    const TONE_REGEX = {
+        "C": /^(do|c)\b/i,
+        "D": /^(re|d)\b/i, // La \b obliga a que termine la palabra. "Re" sirve, "D" sirve. "Do" NO sirve.
+        "E": /^(mi|e)\b/i,
+        "F": /^(fa|f)\b/i,
+        "G": /^(sol|g)\b/i,
+        "A": /^(la|a)\b/i,
+        "B": /^(si|b)\b/i
     };
 
     function loadSongs() {
@@ -263,26 +263,19 @@
       });
 
       const filtered = sorted.filter(song => {
-        // Obtenemos solo los datos relevantes y los limpiamos
-        const toneTitle = (song.tone || "").trim().toLowerCase();
+        const toneTitle = (song.tone || "").trim(); // Mantenemos mayúsculas/minúsculas originales para el regex
         const name = (song.name || "").toLowerCase();
         const lyrics = (song.lyrics || "").toLowerCase();
         
-        // 1. FILTRO DE TONO (ESTRICTO: Solo mira el TITULO del tono)
+        // 1. FILTRO DE TONO CORREGIDO (USANDO REGEX EXACTO)
         let matchesTone = true;
         if (currentToneFilter !== "ALL") {
-            const searchTerms = TONE_MAP[currentToneFilter];
-            
-            // Verificamos si el TITULO DEL TONO (toneTitle) contiene "sol", "do", "re"...
-            // OJO: NO miramos song.lyrics aquí.
-            matchesTone = searchTerms.some(term => {
-                // Buscamos coincidencia exacta de palabra o inicio
-                // Ejemplo: "Sol" coincide con "Sol Mayor", "G" coincide con "G"
-                return toneTitle.includes(term);
-            });
+            const regex = TONE_REGEX[currentToneFilter];
+            // Verifica si el tono empieza con la palabra exacta
+            matchesTone = regex.test(toneTitle);
         }
 
-        // 2. BUSCADOR DE TEXTO (Nombre o letra)
+        // 2. BUSCADOR DE TEXTO
         const combinedText = `${name} ${lyrics}`;
         const matchesSearch = !filterName || combinedText.includes(filterName);
 
