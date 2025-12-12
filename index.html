@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <link rel="icon" type="image/png" href="icono.png" />
-
   <link rel="apple-touch-icon" href="icono.png">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,7 +14,24 @@
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #f3f4f6; }
     header { background: #111827; color: white; padding: 1rem 1.2rem; text-align: center; }
-    header h1 { margin: 0; font-size: 1.4rem; }
+    
+    header h1 { 
+      margin: 0; 
+      font-size: 1.4rem;
+      /* Flexbox para alinear foto y texto */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px; 
+    }
+
+    /* Estilo para la foto del logo */
+    .header-logo {
+      height: 40px; 
+      width: auto;
+      border-radius: 6px; 
+    } 
+
     header p { margin: 0.25rem 0 0; font-size: 0.9rem; opacity: 0.8; }
     main { padding: 1rem; max-width: 1000px; margin: 0 auto; }
     .layout { display: flex; flex-direction: column; gap: 1rem; }
@@ -23,6 +39,19 @@
     .panel { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1rem; }
     .panel h2 { margin-top: 0; font-size: 1.1rem; color: #111827; }
     .songs-panel { flex: 1; min-width: 0; }
+    
+    /* (Aquí continúan el resto de tus estilos que ya tienes más abajo...) */
+    /* Asegúrate de no borrar el resto de tu CSS (tone-btn, etc) que sigue después de .songs-panel */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      <img src="icono.png" alt="Logo" class="header-logo" />
+      Alabanzas Templo Jireh
+    </h1>
+    <p>Selecciona un tono o busca por letra</p>
+  </header>
     
     /* BOTONES DE TONO ESTILO IPAD */
     .tone-filters {
@@ -406,6 +435,7 @@ const CANCIONES_PREDEFINIDAS =[{"id":1765392581354,"name":"Inexplicable","tone":
   </script>
 </body>
 </html>
+
 
 
 
