@@ -1,8 +1,6 @@
-// CADA VEZ QUE HAGAS CAMBIOS EN LAS CANCIONES O EL DISEÑO:
-// Cambia este nombre (ej: "v1" a "v2", "v3", etc.)
-const CACHE_NAME = "templo-jireh-v5";
+// IMPORTANTE: CAMBIA ESTE "v1" a "v2", "v3"... CADA VEZ QUE SUBAS CANCIONES
+const CACHE_NAME = "templo-jireh-v6";
 
-// Archivos que se guardarán en el celular
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
@@ -10,8 +8,9 @@ const ASSETS_TO_CACHE = [
   "./manifest.json"
 ];
 
-// 1. INSTALACIÓN: Descarga los archivos
+// Instalar y forzar espera
 self.addEventListener("install", (e) => {
+  self.skipWaiting(); // <--- ESTO ES LA CLAVE DE LA RAPIDEZ
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
@@ -19,8 +18,9 @@ self.addEventListener("install", (e) => {
   );
 });
 
-// 2. ACTIVACIÓN: Borra cachés viejas (v1 cuando subas la v2)
+// Activar y tomar control
 self.addEventListener("activate", (e) => {
+  e.waitUntil(clients.claim()); // <--- TOMA EL CONTROL INMEDIATO
   e.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(
@@ -34,11 +34,10 @@ self.addEventListener("activate", (e) => {
   );
 });
 
-// 3. INTERCEPTAR PETICIONES: Sirve lo guardado si no hay internet
+// Servir contenido (Offline first)
 self.addEventListener("fetch", (e) => {
   e.respondWith(
     caches.match(e.request).then((response) => {
-      // Si está en caché, lo devuelve. Si no, lo busca en internet.
       return response || fetch(e.request);
     })
   );
