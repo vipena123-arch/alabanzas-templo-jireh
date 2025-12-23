@@ -1,6 +1,6 @@
 // CADA VEZ QUE HAGAS CAMBIOS EN LAS CANCIONES O EL DISEÑO:
 // Cambia este nombre (ej: "v1" a "v2", "v3", etc.)
-const CACHE_NAME = "templo-jireh-v4";
+const CACHE_NAME = "templo-jireh-v5";
 
 // Archivos que se guardarán en el celular
 const ASSETS_TO_CACHE = [
