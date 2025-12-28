@@ -1,5 +1,5 @@
 // IMPORTANTE: CAMBIA ESTE "v1" a "v2", "v3"... CADA VEZ QUE SUBAS CANCIONES
-const CACHE_NAME = "templo-jireh-v7";
+const CACHE_NAME = "templo-jireh-v8";
 
 const ASSETS_TO_CACHE = [
   "./",
